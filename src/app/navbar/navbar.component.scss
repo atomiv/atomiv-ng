@@ -1,0 +1,17 @@
+    .mat-sidenav-container {
+      height: 100%;
+      .mat-sidenav {
+        width: 380px;
+      }
+      .mat-sidenav-content {
+        .mat-toolbar {
+          position: sticky; // or fixed
+          .mat-toolbar-row {
+            height: 90px;
+          }
+        }
+      }
+    }
+
+
+  

@@ -1,0 +1,37 @@
+<div class="container">
+    <div *ngIf="isLoadingResults">
+      <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+    </div>
+    <div>
+      <a mat-flat-button color="primary" (click)="customerDetails()"><mat-icon>info</mat-icon></a>
+    </div>
+    <mat-card>
+      <form [formGroup]="customerForm" (ngSubmit)="onFormSubmit(customerForm.value)">
+        <mat-form-field>
+          <!-- [errorStateMatcher]="matcher" -->
+          <input matInput placeholder="Id" formControlName="id">
+          <mat-error>
+            <span *ngIf="!customerForm.get('id').valid && customerForm.get('id').touched">Please enter Id</span>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <!-- [errorStateMatcher]="matcher" -->
+          <input matInput placeholder="First Name" formControlName="firstName">
+          <mat-error>
+            <span *ngIf="!customerForm.get('firstName').valid && customerForm.get('firstName').touched">Please enter First Name</span>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <!-- [errorStateMatcher]="matcher" -->
+          <input matInput placeholder="Notes" formControlName="notes">
+          <mat-error>
+            <span *ngIf="!customerForm.get('notes').valid && customerForm.get('notes').touched">Please enter Notes</span>
+          </mat-error>
+        </mat-form-field>
+        <div>
+          <button type="submit" [disabled]="!customerForm.valid" mat-flat-button color="primary"><mat-icon>save</mat-icon></button>
+        </div>
+      </form>
+    </mat-card>
+  </div>
+  
