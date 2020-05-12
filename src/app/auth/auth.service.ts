@@ -22,10 +22,13 @@ export class AuthService {
     ) {}
 
   login(user: User) {
+    // if (user.email !== '' && user.password !== '' ) {
+    // if (user.email === 'demo' && user.password === 'demo' ) {
     if (user.email !== '' && user.password !== '' ) {
       this.loggedIn.next(true);
-      // hide
       this.router.navigate(['/']);
+    } else {
+      alert ('Invalid username or password');
     }
     // localStorage.setItem('ACCESS_TOKEN', 'access_token');
   }

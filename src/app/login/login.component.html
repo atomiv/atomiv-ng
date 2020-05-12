@@ -6,7 +6,9 @@
         </a>
     </mat-toolbar-row>
 </mat-toolbar> -->
-  
+
+
+
   
 <div fxLayout="row" fxLayoutAlign="center center" id="login">
     <mat-card>
@@ -20,8 +22,10 @@
           <!-- Email -->
           <mat-form-field appearance="outline">
             <!-- dunno if good.. [(ngModel)]="username" name="username" required> -->
-            <input matInput type="email" placeholder="Email" formControlName="email" required>
+            <!-- formControlName="username" -->
+            <input matInput type="text" placeholder="Username" formControlName="email" required>
             <mat-error *ngIf="isFieldInvalid('email')">
+                <!-- {{ errorMessage }} -->
                 Email is required
             </mat-error>
           </mat-form-field>

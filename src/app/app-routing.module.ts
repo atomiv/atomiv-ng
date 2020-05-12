@@ -6,6 +6,7 @@ import { CustomersComponent } from './customers/customers.component';
 import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
+  // { path: '', redirectTo: '/', pathMatch: 'full' },
   // { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: '', component: CustomersComponent, canActivate: [AuthGuard] },
   { path: 'customers', component: CustomersComponent },
@@ -19,4 +20,14 @@ const routes: Routes = [
 })
 export class AppRoutingModule { }
 
+
+
+/*
+{ path: '', component: HomeComponent, canActivate: [AuthGuard] },
+    { path: 'login', component: LoginComponent },
+    { path: 'register', component: RegisterComponent },
+
+    // otherwise redirect to home
+    { path: '**', redirectTo: '' }
+    */
 

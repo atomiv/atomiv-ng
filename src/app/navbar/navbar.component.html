@@ -24,33 +24,53 @@
         <!-- fxShow="false" -->
         <mat-toolbar-row fxShow="" fxShow.gt-md>
             <!-- ------------------------------------------------------------------------------------ -->
-          <button mat-icon-button fxLayoutAlign="start center" fxFlex.lt-md="33.3%"
+          <!--           <button mat-icon-button fxLayoutAlign="start center" fxFlex.lt-md="33.3%"
           fxHide="false" fxHide.gt-sm>
             <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
           </button>
           <a fxLayoutAlign="center center" fxLayoutAlign.gt-md="start center" fxFlex.lt-md="33.3%"
           routerLink="/">
             <img src="./assets/logo-white-fullsize.svg" height="50" width="" alt="logo">
+          </a> -->
+          <a fxLayoutAlign="center center" fxLayoutAlign.gt-md="start center"
+          routerLink="/">
+            <img src="./assets/logo-white-fullsize.svg" height="50" width="" alt="logo">
           </a>
+          <!-- <a fxLayout="row" fxLayoutAlign="center center" fxFlex
+          routerLink="/">
+            <img src="./assets/logo-white-fullsize.svg" height="50" width="" alt="logo">
+          </a> -->
           <!-- ---------------------------------------------------------------------------------- -->
-          <div fxFlex fxLayout fxLayoutAlign="end" fxHide.lt-md>
-            <!-- jeca -->
+          <div fxFlex fxLayout fxLayoutAlign="end" fxHide.lt-md *ngIf="isLoggedIn$ | async">
+            <!-- JC -->
             <!-- <button mat-button routerLink="/products" routerLinkActive="active">Products</button> -->
             <!-- [routerLinkActiveOptions]="{ exact: true }"  only underlined for /customers not /customers/2 -->
             <button mat-button routerLink="/customers" routerLinkActive="active">Customers
             </button>
-            <!-- jeca -->
+            <!-- JC -->
             <!-- <button mat-button routerLink="/orders" routerLinkActive="active">Orders</button> -->
 
-            <button mat-button routerLink="/login" *ngIf="!isAuthenticated">
+            <button mat-button routerLink="/login" *ngIf="!(isLoggedIn$ | async)">
               Login
             </button>
-            <button mat-button *ngIf="isAuthenticated" (click)="logout()">
+            <button mat-button (click)="onLogout()" *ngIf="isLoggedIn$ | async">
               Logout
             </button>
+<!-- --------------------------------------------------------- -->
+<!-- works -->
+            <!-- <button mat-button *ngIf="isLoggedIn$ | async as loggedIn">
+              Logout22
+            </button>
 
-            <!-- <a mat-button (click)="onLogout()" class="logout-btn">Logout</a> -->
+            <button mat-button *ngIf="isLoggedIn$ | async">
+              Logout22
+            </button> -->
+<!-- ---------------------------------------------------------- -->
+
           </div>
+          <button mat-icon-button *ngIf="!isLoggedIn$ | async" fxHide="false" fxHide.gt-sm fxFlex fxLayoutAlign="end">
+            <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
+          </button>
           <!-- --------------------------------------------------------------------------------- -->
         </mat-toolbar-row>
       </mat-toolbar>
