@@ -4,7 +4,7 @@
 
 $atomiv-primary: mat-palette($mat-deep-purple);
 $atomiv-accent: mat-palette($mat-pink);
-$atomiv-warn: mat-palette($mat-lime);
+$atomiv-warn: mat-palette($mat-red);
 
 $atomiv: mat-light-theme($atomiv-primary, $atomiv-accent, $atomiv-warn);
 

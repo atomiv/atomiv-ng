@@ -6,7 +6,7 @@
       <!-- can we get it to cycle through, have names in ts file -->
       <mat-nav-list>
         <button mat-icon-button  (click)="sidenav.toggle()"><mat-icon>close</mat-icon></button>
-        <a mat-list-item routerLink="/customers3" routerLinkActive="active">Products</a>
+        <a mat-list-item routerLink="/login" routerLinkActive="active">Products</a>
         <a mat-list-item routerLink="/customers" routerLinkActive="active">Customers</a>
         <a mat-list-item routerLink="/customers2" routerLinkActive="active">Orders</a>
       </mat-nav-list>
@@ -34,13 +34,13 @@
           <!-- -------------------------------------- -->
           <div fxFlex fxLayout fxLayoutAlign="end" fxHide.xs>
             <div fxLayout>
-              <a mat-button routerLink="/products" routerLinkActive="active">Products</a>
+              <a mat-button routerLink="/login" routerLinkActive="active">Products</a>
               <!-- [routerLinkActiveOptions]="{ exact: true }"
               only underlined for /customers not /customers/2 -->
               <a mat-button routerLink="/customers" routerLinkActive="active">Customers
               </a>
               <a mat-button routerLink="/orders" routerLinkActive="active">Orders</a>
-              <a mat-button (click)="onLogout()" class="logout-btn">Logout</a>
+              <!-- <a mat-button (click)="onLogout()" class="logout-btn">Logout</a> -->
             </div>
           </div>  
         </mat-toolbar-row>

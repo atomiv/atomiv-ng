@@ -40,11 +40,11 @@ import { LoginComponent } from './login/login.component';
       prefix: 'my-app',
       storageType: 'localStorage'
     }),
-    CustomersModule,
     AppRoutingModule,
     MaterialModule,
     FlexLayoutModule,
-    HttpClientModule
+    HttpClientModule,
+    CustomersModule,
   ],
   providers: [AuthService, AuthGuard],
   bootstrap: [AppComponent]
