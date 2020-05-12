@@ -20,8 +20,9 @@ import { CustomersModule } from './customers/customers.module';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
 
-import { AppRoutingModule } from './app-routing.module';
 import { LoginComponent } from './login/login.component';
+
+import { AppRoutingModule } from './app-routing.module';
 
 
 @NgModule({
