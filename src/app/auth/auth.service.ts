@@ -28,6 +28,7 @@ export class AuthService {
       this.loggedIn.next(true);
       this.router.navigate(['/']);
     } else {
+      // when username and password are set 'demo'
       alert ('Invalid username or password');
     }
     // localStorage.setItem('ACCESS_TOKEN', 'access_token');
