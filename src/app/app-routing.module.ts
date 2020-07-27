@@ -11,7 +11,8 @@ const routes: Routes = [
   { path: '', component: CustomersComponent, canActivate: [AuthGuard] },
   { path: 'customers', component: CustomersComponent },
   { path: 'login', component: LoginComponent },
-  { path: '**', redirectTo: '/customers', pathMatch: 'full'}
+  // uncomment
+  // { path: '**', redirectTo: '/customers', pathMatch: 'full'}
 ];
 
 @NgModule({
