@@ -6,7 +6,7 @@
       <!-- ||| when toggle button is pressed -->
       <mat-nav-list>
         <button mat-icon-button  (click)="sidenav.toggle()"><mat-icon>close</mat-icon></button>
-        <a mat-list-item routerLink="/login" routerLinkActive="active">Products</a>
+        <a mat-list-item routerLink="/products" routerLinkActive="active">Products</a>
         <a mat-list-item routerLink="/customers" routerLinkActive="active">Customers</a>
         <a mat-list-item routerLink="/customers2" routerLinkActive="active">Orders</a>
         <!-- <a mat-list-item routerLink="/login" *ngIf="!isAuthenticated">
@@ -48,7 +48,7 @@
             <button mat-button routerLink="/customers" routerLinkActive="active">Customers
             </button>
             <!-- JC -->
-            <!-- <button mat-button routerLink="/orders" routerLinkActive="active">Orders</button> -->
+            <button mat-button routerLink="/products" routerLinkActive="active">Products</button>
 
             <button mat-button routerLink="/login" *ngIf="!(isLoggedIn$ | async)">
               Login

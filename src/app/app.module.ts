@@ -10,13 +10,20 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 // for MatTable, data table and service file
 import { HttpClientModule } from '@angular/common/http';
 
+import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { CustomerFakeDataService } from './customers/shared/customer-fake-data.service';
+import { ProductFakeDataService } from './products/shared/product-fake-data.service';
+
 import { AppComponent } from './app.component';
 import { AuthGuard } from './auth/auth.guard';
 import { AuthService } from './auth/auth.service';
+import { CustomerService } from './customers/shared/customer.service';
+import { ProductService } from './products/shared/product.service';
 
 import { LocalStorageModule } from 'angular-2-local-storage';
 
 import { CustomersModule } from './customers/customers.module';
+import { ProductsModule } from './products/products.module';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
 
@@ -45,9 +52,17 @@ import { AppRoutingModule } from './app-routing.module';
     MaterialModule,
     FlexLayoutModule,
     HttpClientModule,
+
+    // remove for real server
+    HttpClientInMemoryWebApiModule.forRoot(
+      CustomerFakeDataService, { dataEncapsulation: false }
+    ),
+
     CustomersModule,
+    ProductsModule,
   ],
-  providers: [AuthService, AuthGuard],
+  // TODO added CustomerService HttpErrorResponse, remove from other files
+  providers: [AuthService, AuthGuard, CustomerService, ProductService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

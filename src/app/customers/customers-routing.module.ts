@@ -32,12 +32,12 @@ const routes: Routes = [
         component: CustomerEditComponent,
         data: { title: 'Edit Customer' }
       },
+      {
+        path: '**',
+        redirectTo: '/customers'
+      },
     ]
-  },
-  {
-    path: '**',
-    redirectTo: '/customers'
-  },
+  }
 
 
 ];

@@ -5,8 +5,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { HttpClientModule } from '@angular/common/http'; // for the service file, fakeApi
 
-import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { CustomerFakeDataService } from './shared/customer-fake-data.service';
+// import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
+// import { CustomerFakeDataService } from './shared/customer-fake-data.service';
 
 import { MaterialModule } from '../shared/material.module';
 
@@ -25,10 +25,10 @@ import { CustomersRoutingModule } from './customers-routing.module';
     FlexLayoutModule,
     HttpClientModule,
 
-    // remove for real server
-    HttpClientInMemoryWebApiModule.forRoot(
-      CustomerFakeDataService, { dataEncapsulation: false }
-    ),
+    // // remove for real server
+    // HttpClientInMemoryWebApiModule.forRoot(
+    //   CustomerFakeDataService, { dataEncapsulation: false }
+    // ),
 
     MaterialModule,
     CustomersRoutingModule
