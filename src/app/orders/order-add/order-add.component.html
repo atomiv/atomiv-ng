@@ -1,0 +1,34 @@
+<div class="container">
+    <div *ngIf="isLoadingResults">
+      <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+    </div>
+    <div>
+      <a mat-flat-button color="primary" [routerLink]="['/orders']"><mat-icon>list</mat-icon></a>
+    </div>
+    <mat-card>
+      <form [formGroup]="orderForm" (ngSubmit)="onFormSubmit(orderForm.value)">
+        <mat-form-field>
+          <!-- [errorStateMatcher]="matcher" -->
+          <input matInput placeholder="First Name" formControlName="firstName">
+          <mat-error>
+            <span *ngIf="!orderForm.get('firstName').valid && orderForm.get('firstName').touched">Please enter First Name</span>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <!-- [errorStateMatcher]="matcher" -->
+          <input matInput placeholder="Notes" formControlName="notes">
+          <mat-error>
+            <span *ngIf="!orderForm.get('notes').valid && orderForm.get('notes').touched">Please enter Notes</span>
+          </mat-error>
+        </mat-form-field>
+        
+        <div class="button-row">
+          <!-- <button (click)="save()">save</button> -->
+          <!-- <button (click)="goBack()">go back</button> -->
+          <button type="submit" [disabled]="!orderForm.valid" mat-flat-button color="primary"><mat-icon>save</mat-icon></button>
+        </div>
+      </form>
+    </mat-card>
+  </div>
+  
+  

@@ -8,7 +8,7 @@
         <button mat-icon-button  (click)="sidenav.toggle()"><mat-icon>close</mat-icon></button>
         <a mat-list-item routerLink="/products" routerLinkActive="active">Products</a>
         <a mat-list-item routerLink="/customers" routerLinkActive="active">Customers</a>
-        <a mat-list-item routerLink="/customers2" routerLinkActive="active">Orders</a>
+        <a mat-list-item routerLink="/orders" routerLinkActive="active">Orders</a>
         <!-- <a mat-list-item routerLink="/login" *ngIf="!isAuthenticated">
           Login
         </a>
@@ -47,8 +47,8 @@
             <!-- [routerLinkActiveOptions]="{ exact: true }"  only underlined for /customers not /customers/2 -->
             <button mat-button routerLink="/customers" routerLinkActive="active">Customers
             </button>
-            <!-- JC -->
             <button mat-button routerLink="/products" routerLinkActive="active">Products</button>
+            <button mat-button routerLink="/orders" routerLinkActive="active">Orders</button>
 
             <button mat-button routerLink="/login" *ngIf="!(isLoggedIn$ | async)">
               Login

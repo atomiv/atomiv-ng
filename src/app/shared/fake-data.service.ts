@@ -1,5 +1,8 @@
 import { InMemoryDbService } from 'angular-in-memory-web-api';
 import { ICustomer } from '../customers/shared/customer';
+import { IProduct } from '../products/shared/product';
+import { IOrder } from '../orders/shared/order';
+
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -58,7 +61,30 @@ export class FakeDataService implements InMemoryDbService {
       { id: 20, firstName: 'Name20', notes: '' },
     ];
 
-    return { customers, products };
+    const orders = [
+      { id: 1, firstName: 'order1', notes: '' },
+      { id: 2, firstName: 'order2', notes: '01' },
+      { id: 3, firstName: 'order3', notes: '02' },
+      { id: 4, firstName: 'order4', notes: '03' },
+      { id: 5, firstName: 'order5', notes: '04' },
+      { id: 6, firstName: 'order6', notes: '05' },
+      { id: 7, firstName: 'Name7', notes: '' },
+      { id: 8, firstName: 'Name8', notes: '' },
+      { id: 9, firstName: 'Name9', notes: '' },
+      { id: 10, firstName: 'Name10', notes: '' },
+      { id: 11, firstName: 'Name11', notes: '' },
+      { id: 12, firstName: 'Name12', notes: '' },
+      { id: 13, firstName: 'Name13', notes: '' },
+      { id: 14, firstName: 'Name14', notes: '' },
+      { id: 15, firstName: 'Name15', notes: '' },
+      { id: 16, firstName: 'Name16', notes: '' },
+      { id: 17, firstName: 'Name17', notes: '' },
+      { id: 18, firstName: 'Name18', notes: '' },
+      { id: 19, firstName: 'Name19', notes: '' },
+      { id: 20, firstName: 'Name20', notes: '' },
+    ];
+
+    return { customers, products, orders };
   }
 
   genId(customers: ICustomer[]): number {
@@ -67,6 +93,10 @@ export class FakeDataService implements InMemoryDbService {
 
   // genId(products: IProduct[]): number {
   //   return products.length > 0 ? Math.max(...products.map(product => product.id)) + 1 : 11;
+  // }
+
+  // genId(orders: IOrder[]): number {
+  //   return orders.length > 0 ? Math.max(...orders.map(order => order.id)) + 1 : 11;
   // }
 
 }

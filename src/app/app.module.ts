@@ -20,11 +20,13 @@ import { AuthGuard } from './auth/auth.guard';
 import { AuthService } from './auth/auth.service';
 import { CustomerService } from './customers/shared/customer.service';
 import { ProductService } from './products/shared/product.service';
+import { OrderService } from './orders/shared/order.service';
 
 import { LocalStorageModule } from 'angular-2-local-storage';
 
 import { CustomersModule } from './customers/customers.module';
 import { ProductsModule } from './products/products.module';
+import { OrdersModule } from './orders/orders.module';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
 
@@ -61,9 +63,16 @@ import { AppRoutingModule } from './app-routing.module';
 
     CustomersModule,
     ProductsModule,
+    OrdersModule
   ],
   // TODO added CustomerService HttpErrorResponse, remove from other files
-  providers: [AuthService, AuthGuard, CustomerService, ProductService],
+  providers: [
+    AuthService,
+    AuthGuard,
+    CustomerService,
+    ProductService,
+    OrderService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
