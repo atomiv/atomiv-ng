@@ -11,8 +11,9 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { HttpClientModule } from '@angular/common/http';
 
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { CustomerFakeDataService } from './customers/shared/customer-fake-data.service';
-import { ProductFakeDataService } from './products/shared/product-fake-data.service';
+import { FakeDataService } from './shared/fake-data.service';
+// import { CustomerFakeDataService } from './customers/shared/customer-fake-data.service';
+// import { ProductFakeDataService } from './products/shared/product-fake-data.service';
 
 import { AppComponent } from './app.component';
 import { AuthGuard } from './auth/auth.guard';
@@ -55,7 +56,7 @@ import { AppRoutingModule } from './app-routing.module';
 
     // remove for real server
     HttpClientInMemoryWebApiModule.forRoot(
-      CustomerFakeDataService, { dataEncapsulation: false }
+      FakeDataService, { dataEncapsulation: false }
     ),
 
     CustomersModule,

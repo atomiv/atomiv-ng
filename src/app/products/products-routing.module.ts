@@ -3,8 +3,8 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { ProductsComponent } from './products.component'; // or ProductListComponent
 import { ProductAddComponent } from './product-add/product-add.component';
-// import { ProductDetailComponent } from './product-detail/product-detail.component';
-// import { ProductEditComponent } from './product-edit/product-edit.component';
+import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { ProductEditComponent } from './product-edit/product-edit.component';
 
 const routes: Routes = [
 
@@ -22,20 +22,20 @@ const routes: Routes = [
         component: ProductAddComponent,
         data: { title: 'Add Product' }
       },
-      // {
-      //   path: ':id',
-      //   component: ProductDetailComponent,
-      //   data: { title: 'Product Details' }
-      // },
-      // {
-      //   path: 'edit/:id',
-      //   component: ProductEditComponent,
-      //   data: { title: 'Edit Product' }
-      // },
-      // {
-      //   path: '**',
-      //   redirectTo: '/products'
-      // },
+      {
+        path: ':id',
+        component: ProductDetailComponent,
+        data: { title: 'Product Details' }
+      },
+      {
+        path: 'edit/:id',
+        component: ProductEditComponent,
+        data: { title: 'Edit Product' }
+      },
+      {
+        path: '**',
+        redirectTo: '/products'
+      },
     ]
   },
 
