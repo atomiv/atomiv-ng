@@ -2,6 +2,7 @@ import { InMemoryDbService } from 'angular-in-memory-web-api';
 import { ICustomer } from '../customers/shared/customer';
 import { IProduct } from '../products/shared/product';
 import { IOrder } from '../orders/shared/order';
+import { ISupplier } from '../suppliers/shared/supplier';
 
 import { Injectable } from '@angular/core';
 
@@ -84,7 +85,30 @@ export class FakeDataService implements InMemoryDbService {
       { id: 20, firstName: 'Name20', notes: '' },
     ];
 
-    return { customers, products, orders };
+    const suppliers = [
+      { id: 1, firstName: 's1', notes: '' },
+      { id: 2, firstName: 's2', notes: '01' },
+      { id: 3, firstName: 's3', notes: '02' },
+      { id: 4, firstName: 's4', notes: '03' },
+      { id: 5, firstName: 's5', notes: '04' },
+      { id: 6, firstName: 's6', notes: '05' },
+      { id: 7, firstName: 'Name7', notes: '' },
+      { id: 8, firstName: 'Name8', notes: '' },
+      { id: 9, firstName: 'Name9', notes: '' },
+      { id: 10, firstName: 'Name10', notes: '' },
+      { id: 11, firstName: 'Name11', notes: '' },
+      { id: 12, firstName: 'Name12', notes: '' },
+      { id: 13, firstName: 'Name13', notes: '' },
+      { id: 14, firstName: 'Name14', notes: '' },
+      { id: 15, firstName: 'Name15', notes: '' },
+      { id: 16, firstName: 'Name16', notes: '' },
+      { id: 17, firstName: 'Name17', notes: '' },
+      { id: 18, firstName: 'Name18', notes: '' },
+      { id: 19, firstName: 'Name19', notes: '' },
+      { id: 20, firstName: 'Name20', notes: '' },
+    ];
+
+    return { customers, products, orders, suppliers };
   }
 
   genId(customers: ICustomer[]): number {

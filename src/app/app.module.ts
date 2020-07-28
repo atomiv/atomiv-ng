@@ -21,12 +21,14 @@ import { AuthService } from './auth/auth.service';
 import { CustomerService } from './customers/shared/customer.service';
 import { ProductService } from './products/shared/product.service';
 import { OrderService } from './orders/shared/order.service';
+import { SupplierService } from './suppliers/shared/supplier.service';
 
 import { LocalStorageModule } from 'angular-2-local-storage';
 
 import { CustomersModule } from './customers/customers.module';
 import { ProductsModule } from './products/products.module';
 import { OrdersModule } from './orders/orders.module';
+import { SuppliersModule } from './suppliers/suppliers.module';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
 
@@ -63,7 +65,8 @@ import { AppRoutingModule } from './app-routing.module';
 
     CustomersModule,
     ProductsModule,
-    OrdersModule
+    OrdersModule,
+    SuppliersModule
   ],
   // TODO added CustomerService HttpErrorResponse, remove from other files
   providers: [
@@ -71,7 +74,8 @@ import { AppRoutingModule } from './app-routing.module';
     AuthGuard,
     CustomerService,
     ProductService,
-    OrderService
+    OrderService,
+    SupplierService
   ],
   bootstrap: [AppComponent]
 })
