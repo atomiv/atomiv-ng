@@ -38,7 +38,6 @@ export class ProductsComponent implements OnInit {
 
   dataSource = new MatTableDataSource<IProduct>();
 
-  // ----------------------------------------------------
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
@@ -68,12 +67,10 @@ export class ProductsComponent implements OnInit {
   }
 
 
-  // for filtering data ----------------------------------------
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim()
     .toLowerCase();
     this.dataSource.filter = filterValue;
-    // no results
     if (this.dataSource.filteredData.length > 0) {
       this.isTableHasData = true;
     } else {
@@ -81,7 +78,6 @@ export class ProductsComponent implements OnInit {
     }
   }
 
-  // highlight row
   highlight(row) {
     this.selectedRowIndex = row.id;
   }

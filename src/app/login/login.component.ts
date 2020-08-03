@@ -8,22 +8,17 @@ import { AuthService } from '../auth/auth.service';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  // NEW LOGIN FORM
-  // isAuthenticated: boolean;
 
-
-  form: FormGroup; // loginForm
+  form: FormGroup;
   private formSubmitAttempt: boolean;
 
   constructor(
-    private formBuilder: FormBuilder, // fb
+    private formBuilder: FormBuilder,
     private authService: AuthService,
   ) { }
 
   ngOnInit() {
     this.form  =  this.formBuilder.group({
-      // 'email': new FormControl(null, [Validators.required, Validators.email]),
-      // 'password': new FormControl(null, [Validators.required, Validators.minLength(6)])
         email: ['', Validators.required],
         password: ['', Validators.required]
     });
@@ -36,7 +31,6 @@ export class LoginComponent implements OnInit {
     );
   }
 
-  // login()
   onSubmit() {
     if (this.form.valid) {
       this.authService.login(this.form.value);
@@ -44,7 +38,4 @@ export class LoginComponent implements OnInit {
     this.formSubmitAttempt = true;
   }
 
-
 }
-
-

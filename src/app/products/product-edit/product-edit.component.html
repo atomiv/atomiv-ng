@@ -8,21 +8,18 @@
     <mat-card>
       <form [formGroup]="productForm" (ngSubmit)="onFormSubmit(productForm.value)">
         <mat-form-field>
-          <!-- [errorStateMatcher]="matcher" -->
           <input matInput placeholder="Id" formControlName="id">
           <mat-error>
             <span *ngIf="!productForm.get('id').valid && productForm.get('id').touched">Please enter Id</span>
           </mat-error>
         </mat-form-field>
         <mat-form-field>
-          <!-- [errorStateMatcher]="matcher" -->
           <input matInput placeholder="First Name" formControlName="firstName">
           <mat-error>
             <span *ngIf="!productForm.get('firstName').valid && productForm.get('firstName').touched">Please enter First Name</span>
           </mat-error>
         </mat-form-field>
         <mat-form-field>
-          <!-- [errorStateMatcher]="matcher" -->
           <input matInput placeholder="Notes" formControlName="notes">
           <mat-error>
             <span *ngIf="!productForm.get('notes').valid && productForm.get('notes').touched">Please enter Notes</span>

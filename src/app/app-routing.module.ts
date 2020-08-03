@@ -9,18 +9,15 @@ import { OrdersComponent } from './orders/orders.component';
 import { SuppliersComponent } from './suppliers/suppliers.component';
 
 const routes: Routes = [
-  // { path: '', redirectTo: '/', pathMatch: 'full' },
-  // { path: '', redirectTo: 'login', pathMatch: 'full' },
-  // yes
-  // { path: '', component: CustomersComponent, canActivate: [AuthGuard] },
-  { path: '', component: CustomersComponent },
   { path: 'login', component: LoginComponent },
+  // TODO
+  // { path: 'customers', component: CustomersComponent, canActivate: [AuthGuard] },
   { path: 'customers', component: CustomersComponent },
   { path: 'products', component: ProductsComponent },
   { path: 'orders', component: OrdersComponent },
-  { path: 'suppliers', component: SuppliersComponent }
-  // uncomment
-  // { path: '**', redirectTo: '/customers', pathMatch: 'full'}
+  { path: 'suppliers', component: SuppliersComponent },
+  { path: '', redirectTo: 'customers', pathMatch: 'full' },
+  // { path: '**', redirectTo: '/customers' }
 ];
 
 @NgModule({
@@ -28,15 +25,3 @@ const routes: Routes = [
   exports: [ RouterModule ]
 })
 export class AppRoutingModule { }
-
-
-
-/*
-{ path: '', component: HomeComponent, canActivate: [AuthGuard] },
-    { path: 'login', component: LoginComponent },
-    { path: 'register', component: RegisterComponent },
-
-    // otherwise redirect to home
-    { path: '**', redirectTo: '' }
-    */
-

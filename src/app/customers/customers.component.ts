@@ -13,7 +13,6 @@ import { MatTableDataSource } from '@angular/material/table';
   styleUrls: ['./customers.component.scss']
 })
 export class CustomersComponent implements OnInit {
-  // highlight row
   selectedRowIndex = -1;
 
   // MatPaginator Inputs
@@ -31,33 +30,26 @@ export class CustomersComponent implements OnInit {
   ];
 
   versions = [
-    {'id': '', 'name': 'All results' },
-    {'id': '2', 'name': 'Show results cont. "2"' },
+    { id: '', 'name': 'All results' },
+    { id: '2', 'name': 'Show results cont. "2"' },
     { id: '3', name: 'Filter results cont. "3"' },
   ];
-  // selected2 = this.versions;
   selectedVersion = this.versions[0].id;
 
   isLoadingResults = true;
 
   dataSource = new MatTableDataSource<ICustomer>();
 
-  // ----------------------------------------------------
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
-  // add private route: ActivatedRoute ??
-  // private trainingService: TrainingService
-  constructor(private service: CustomerService) { } // or articleService: ArticleService
+  constructor(private service: CustomerService) { }
 
   ngOnInit() {
     this.loadData();
 
-    // sorting. or put it in -- ngAfterViewInit()
     this.dataSource.sort = this.sort;
-    // pagination
     this.dataSource.paginator = this.paginator;
-    // don't need 'dataSource' for it to work
     this.dataSource.paginator._intl.itemsPerPageLabel = 'Results per page:';
     // hide Next and Previous page tooltips
     const paginatorIntl = this.paginator._intl;
@@ -65,7 +57,7 @@ export class CustomersComponent implements OnInit {
     paginatorIntl.previousPageLabel = '';
   }
 
- // or refresh()
+  // or refresh()
   loadData() {
     this.service.getCustomers()
     .subscribe((res: ICustomer[]) => {
@@ -79,7 +71,7 @@ export class CustomersComponent implements OnInit {
   }
 
 
-  // for filtering data ----------------------------------------
+  // filtering data
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim()
     .toLowerCase();

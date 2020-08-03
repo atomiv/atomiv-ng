@@ -1,17 +1,14 @@
 import { NgModule, Component } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { CustomersComponent } from './customers.component'; // or CustomerListComponent
+import { CustomersComponent } from './customers.component';
 import { CustomerAddComponent } from './customer-add/customer-add.component';
 import { CustomerDetailComponent } from './customer-detail/customer-detail.component';
 import { CustomerEditComponent } from './customer-edit/customer-edit.component';
 
 const routes: Routes = [
-
   {
     path: 'customers',
-    // component: CustomersComponent,
-    // data: { title: 'List of Customers'},
     children: [
       { path: '',
         component: CustomersComponent,
@@ -32,14 +29,17 @@ const routes: Routes = [
         component: CustomerEditComponent,
         data: { title: 'Edit Customer' }
       },
+      // TODO fixup
       {
         path: '**',
         redirectTo: '/customers'
-      },
+      }
     ]
+  },
+  {
+    path: '**',
+    redirectTo: '/customers'
   }
-
-
 ];
 
 @NgModule({

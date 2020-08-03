@@ -26,10 +26,11 @@
       </div>
   
       <div fxFlex fxLayoutAlign="end center" fxLayoutGap="1rem">
-        <a mat-raised-button color="accent" [routerLink]="['/customers/create']">
-          <mat-icon>add</mat-icon>
           <!-- Add -->
+          <a mat-raised-button color="accent" [routerLink]="['/customers/create']">
+          <mat-icon>add</mat-icon>
         </a>
+        <!-- TODO -->
         <!-- refresh button. refresh data source (mat-table) - redo -->
         <!-- <a mat-raised-button color="primary" (click)="loadData()">
           <mat-icon>refresh</mat-icon>
@@ -69,7 +70,6 @@
         </tr>
       </table>
 
-      <!-- (page)="pageEvent = $event" -->
       <mat-paginator [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions">
       </mat-paginator>
   

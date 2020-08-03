@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { HttpClientModule } from '@angular/common/http'; // for the service file, fakeApi
 
 import { MaterialModule } from '../shared/material.module';
 
@@ -20,7 +19,6 @@ import { SuppliersRoutingModule } from './suppliers-routing.module';
     FormsModule,
     ReactiveFormsModule,
     FlexLayoutModule,
-    HttpClientModule,
     MaterialModule,
     SuppliersRoutingModule
   ],

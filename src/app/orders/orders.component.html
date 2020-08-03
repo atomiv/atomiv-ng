@@ -28,13 +28,7 @@
       <div fxFlex fxLayoutAlign="end center" fxLayoutGap="1rem">
         <a mat-raised-button color="accent" [routerLink]="['/orders/create']">
           <mat-icon>add</mat-icon>
-          <!-- Add -->
         </a>
-        <!-- refresh button. refresh data source (mat-table) - redo -->
-        <!-- <a mat-raised-button color="primary" (click)="loadData()">
-          <mat-icon>refresh</mat-icon>
-          Refresh
-        </a> -->
       </div>
 
 
@@ -69,13 +63,11 @@
         </tr>
       </table>
 
-      <!-- (page)="pageEvent = $event" -->
       <mat-paginator [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions">
       </mat-paginator>
   
     </div>
   
-    <!-- No matching results ------------------------------------- -->
     <div [hidden]="isTableHasData">No matching results.</div>
     
   </div>

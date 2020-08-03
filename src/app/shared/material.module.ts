@@ -1,8 +1,4 @@
-// material.module.ts
 import { NgModule } from '@angular/core';
-// import { ModuleWithProviders, NgModule} from '@angular/core';
-// import { MAT_LABEL_GLOBAL_OPTIONS, MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
-// import { MatIconRegistry } from '@angular/material/icon';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatButtonModule } from '@angular/material/button';
@@ -71,7 +67,6 @@ const mm = [
   MatToolbarModule,
   MatTooltipModule,
   MatTreeModule,
-  // MatNativeDateModule
 ];
 
 @NgModule({
@@ -81,15 +76,4 @@ const mm = [
     providers: [
     ]
 })
-export class MaterialModule {
-    // constructor(public matIconRegistry: MatIconRegistry) {
-    //     // matIconRegistry.registerFontClassAlias('fontawesome', 'fa');
-    // }
-
-    // static forRoot(): ModuleWithProviders {
-    //     return {
-    //         ngModule: MaterialModule,
-    //         providers: [MatIconRegistry]
-    //     };
-    // }
-}
+export class MaterialModule { }

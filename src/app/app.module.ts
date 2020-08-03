@@ -7,13 +7,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './shared/material.module';
 // Flex Layout
 import { FlexLayoutModule } from '@angular/flex-layout';
-// for MatTable, data table and service file
+// For MatTable, Data Table and service file
 import { HttpClientModule } from '@angular/common/http';
 
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { FakeDataService } from './shared/fake-data.service';
-// import { CustomerFakeDataService } from './customers/shared/customer-fake-data.service';
-// import { ProductFakeDataService } from './products/shared/product-fake-data.service';
 
 import { AppComponent } from './app.component';
 import { AuthGuard } from './auth/auth.guard';
@@ -53,22 +51,22 @@ import { AppRoutingModule } from './app-routing.module';
       prefix: 'my-app',
       storageType: 'localStorage'
     }),
-    AppRoutingModule,
+    CustomersModule,
+    ProductsModule,
+    OrdersModule,
+    SuppliersModule,
+
     MaterialModule,
     FlexLayoutModule,
     HttpClientModule,
-
-    // remove for real server
+    // TODO remove for real server
     HttpClientInMemoryWebApiModule.forRoot(
       FakeDataService, { dataEncapsulation: false }
     ),
 
-    CustomersModule,
-    ProductsModule,
-    OrdersModule,
-    SuppliersModule
+    AppRoutingModule,
+
   ],
-  // TODO added CustomerService HttpErrorResponse, remove from other files
   providers: [
     AuthService,
     AuthGuard,

@@ -47,7 +47,6 @@ export class OrderEditComponent implements OnInit {
     this.isLoadingResults = true;
     this.service.updateOrder(this.id, form)
       .subscribe(res => {
-          // TODO: VC: Handling no-result case
           this.isLoadingResults = false;
           this.router.navigate(['/orders', id]);
         }, (err) => {

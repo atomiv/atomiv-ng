@@ -27,12 +27,6 @@ export class SupplierAddComponent implements OnInit {
     });
   }
 
-  /* createUser(): void {
-    this.userService.createUser(this.user)
-    .subscribe( data => {
-      alert("User created successfully.");
-    }); */
-
   onFormSubmit(form: NgForm) {
     this.isLoadingResults = true;
     this.service.addSupplier(form)

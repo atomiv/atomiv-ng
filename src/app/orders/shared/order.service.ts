@@ -1,12 +1,10 @@
-// SERVICES folder
-
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 import { catchError, tap, map } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 
-import { IOrder } from './order'; // or order.model.ts
+import { IOrder } from './order';
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
