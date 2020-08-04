@@ -15,8 +15,11 @@ export class ProductEditComponent implements OnInit {
   productForm: FormGroup;
 
   id: number;
-  firstName: string;
-  notes: string;
+  code: string;
+  item: string;
+  description: string;
+  price: string;
+  isListed: string;
 
   isLoadingResults = false;
 
@@ -26,8 +29,11 @@ export class ProductEditComponent implements OnInit {
     this.getProduct(this.route.snapshot.params['id']);
     this.productForm = this.formBuilder.group({
       'id' : [null, Validators.required],
-      'firstName' : [null, Validators.required],
-      'notes' : [null, null]
+      'code' : [null, Validators.required],
+      'item' : [null, Validators.required],
+      'description' : [null, Validators.required],
+      'price' : [null, Validators.required],
+      'isListed' : [null, Validators.required],
     });
   }
 
@@ -36,8 +42,11 @@ export class ProductEditComponent implements OnInit {
       this.id = data.id;
       this.productForm.setValue({
         id: data.id,
-        firstName: data.firstName,
-        notes: data.notes
+        code: data.code,
+        item: data.item,
+        description: data.description,
+        price: data.price,
+        isListed: data.isListed
       });
     });
   }

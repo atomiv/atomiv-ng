@@ -1,6 +1,7 @@
 export interface ISupplier {
     id: number;
-    firstName: string;
+    name: string;
+    city: string;
     notes?: string;
 }
 

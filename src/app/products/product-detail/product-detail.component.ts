@@ -11,9 +11,13 @@ import { IProduct } from '../shared/product';
 })
 export class ProductDetailComponent implements OnInit {
 
+  // TODO --- IMPORTANT -- what details should be below, maybe delete inside { }
   product: IProduct = { id: 0,
-    firstName: '',
-    notes: ''
+    code: '',
+    item: '',
+    description: '',
+    price: '',
+    isListed: ''
   };
 
   isLoadingResults = true;

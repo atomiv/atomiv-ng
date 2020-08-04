@@ -15,7 +15,8 @@ export class SupplierEditComponent implements OnInit {
   supplierForm: FormGroup;
 
   id: number;
-  firstName: string;
+  name: string;
+  city: string;
   notes: string;
 
   isLoadingResults = false;
@@ -26,7 +27,8 @@ export class SupplierEditComponent implements OnInit {
     this.getSupplier(this.route.snapshot.params['id']);
     this.supplierForm = this.formBuilder.group({
       'id' : [null, Validators.required],
-      'firstName' : [null, Validators.required],
+      'name' : [null, Validators.required],
+      'city' : [null, Validators.required],
       'notes' : [null, null]
     });
   }
@@ -36,7 +38,8 @@ export class SupplierEditComponent implements OnInit {
       this.id = data.id;
       this.supplierForm.setValue({
         id: data.id,
-        firstName: data.firstName,
+        name: data.name,
+        city: data.city,
         notes: data.notes
       });
     });

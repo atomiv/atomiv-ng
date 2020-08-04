@@ -12,7 +12,8 @@ import { ISupplier } from '../shared/supplier';
 export class SupplierDetailComponent implements OnInit {
 
   supplier: ISupplier = { id: 0,
-    firstName: '',
+    name: '',
+    city: '',
     notes: ''
   };
 

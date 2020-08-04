@@ -1,7 +1,10 @@
 export interface IProduct {
     id: number;
-    firstName: string;
-    notes?: string;
+    code: string;
+    item: string;
+    description: string;
+    price: string;
+    isListed: string;
 }
 
 

@@ -22,8 +22,8 @@ export class SuppliersComponent implements OnInit {
 
   displayedColumns: string[] = [
     'id',
-    'firstName',
-    'notes',
+    'name',
+    'city',
     'action'
   ];
 

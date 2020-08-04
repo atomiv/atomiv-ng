@@ -1,30 +1,40 @@
-<div class="container">
-    <div *ngIf="isLoadingResults">
-      <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
-    </div>
-    <div>
-      <a mat-flat-button color="primary" [routerLink]="['/orders']"><mat-icon>list</mat-icon></a>
-    </div>
-    <mat-card>
-      <form [formGroup]="orderForm" (ngSubmit)="onFormSubmit(orderForm.value)">
-        <mat-form-field>
-          <input matInput placeholder="First Name" formControlName="firstName">
-          <mat-error>
-            <span *ngIf="!orderForm.get('firstName').valid && orderForm.get('firstName').touched">Please enter First Name</span>
-          </mat-error>
-        </mat-form-field>
-        <mat-form-field>
-          <input matInput placeholder="Notes" formControlName="notes">
-          <mat-error>
-            <span *ngIf="!orderForm.get('notes').valid && orderForm.get('notes').touched">Please enter Notes</span>
-          </mat-error>
-        </mat-form-field>
-        
-        <div class="button-row">
-          <button type="submit" [disabled]="!orderForm.valid" mat-flat-button color="primary"><mat-icon>save</mat-icon></button>
-        </div>
-      </form>
-    </mat-card>
+<div class="container mt-5">
+  <div *ngIf="isLoadingResults">
+    <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
   </div>
-  
-  
+  <div>
+    <!-- <mat-icon>list</mat-icon> -->
+    <a mat-button color="primary" class="mb-5" [routerLink]="['/orders']"><mat-icon>arrow_back_ios</mat-icon>Back</a>
+  </div>
+  <mat-card>
+    <form [formGroup]="orderForm" (ngSubmit)="onFormSubmit(orderForm.value)">
+      <mat-form-field>
+        <input matInput placeholder="First Name" formControlName="firstName">
+        <mat-error>
+          <span *ngIf="!orderForm.get('firstName').valid && orderForm.get('firstName').touched">Please enter First Name</span>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Last Name" formControlName="lastName">
+        <mat-error>
+          <span *ngIf="!orderForm.get('lastName').valid && orderForm.get('lastName').touched">Please enter Last Name</span>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Email" formControlName="email">
+        <mat-error>
+          <span *ngIf="!orderForm.get('email').valid && orderForm.get('email').touched">Please enter Email Address</span>
+        </mat-error>
+      </mat-form-field>
+      
+      <div class="button-row">
+        <!-- TODO -->
+        <!-- <button (click)="save()">save</button> -->
+        <!-- <button (click)="goBack()">go back</button> -->
+        <button type="submit" [disabled]="!orderForm.valid" mat-flat-button color="primary" class="mr-3">Save</button>
+        <button mat-stroked-button color="primary" [routerLink]="['/orders']">Cancel</button>
+      </div>
+    </form>
+  </mat-card>
+</div>
+

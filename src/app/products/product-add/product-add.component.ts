@@ -13,8 +13,11 @@ export class ProductAddComponent implements OnInit {
 
   productForm: FormGroup;
 
-  firstName: string;
-  notes: string;
+  code: string;
+  item: string;
+  description: string;
+  price: string;
+  isListed: string;
 
   isLoadingResults = false;
 
@@ -22,8 +25,11 @@ export class ProductAddComponent implements OnInit {
 
   ngOnInit() {
     this.productForm = this.formBuilder.group({
-      'firstName' : [null, Validators.required],
-      'notes' : [null, null]
+      'code' : [null, Validators.required],
+      'item' : [null, Validators.required],
+      'description' : [null, Validators.required],
+      'price' : [null, Validators.required],
+      'isListed' : [null, Validators.required],
     });
   }
 

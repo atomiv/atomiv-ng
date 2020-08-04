@@ -13,7 +13,8 @@ export class SupplierAddComponent implements OnInit {
 
   supplierForm: FormGroup;
 
-  firstName: string;
+  name: string;
+  city: string;
   notes: string;
 
   isLoadingResults = false;
@@ -22,7 +23,8 @@ export class SupplierAddComponent implements OnInit {
 
   ngOnInit() {
     this.supplierForm = this.formBuilder.group({
-      'firstName' : [null, Validators.required],
+      'name' : [null, Validators.required],
+      'city' : [null, Validators.required],
       'notes' : [null, null]
     });
   }
