@@ -17,7 +17,7 @@ const routes: Routes = [
   { path: 'orders', component: OrdersComponent },
   { path: 'suppliers', component: SuppliersComponent },
   { path: '', redirectTo: 'customers', pathMatch: 'full' },
-  // { path: '**', redirectTo: '/customers' }
+  { path: '**', redirectTo: '/customers' }
 ];
 
 @NgModule({

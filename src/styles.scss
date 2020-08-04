@@ -57,3 +57,60 @@ table.mat-table {
 // // works
 // @include angular-material-typography($custom-typography);
 
+
+
+// Card
+
+.mat-card-actions {
+  padding: 0 10px 10px 10px !important;
+}
+
+.mat-card-header-text {
+  margin: 0 !important;
+}
+
+.mat-list-item-content {
+  padding: 0 !important;
+}
+
+.mat-stroked-button {
+  margin-left: 0 !important;
+}
+
+// < Back - button
+.container .mat-button {
+  padding-left: 0 !important;
+  &:hover, &:focus, &:active, &.active {
+    // background-color: #fafafa !important; // .mat-drawer-container bg-color
+    // background: #fafafa !important;
+    color: mat-color($atomiv-accent) !important;
+  }
+  .mat-ripple, .mat-button-ripple {
+    display: none !important;
+  }
+  .mat-button-focus-overlay {
+    display: none;
+  }
+}
+
+
+
+// Table
+td:focus, td:active, td.active {
+  outline: none;
+}
+
+*:focus, *:active, *.active {
+  outline: none !important;
+}
+
+td a {
+  color: mat-color($atomiv-primary, A200) !important;
+  &:focus, &:active, &.active {
+    color: mat-color($atomiv-accent) !important;
+  }
+}
+
+a {
+  text-decoration: none !important;
+}

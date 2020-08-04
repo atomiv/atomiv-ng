@@ -9,6 +9,7 @@ import { CustomerEditComponent } from './customer-edit/customer-edit.component';
 const routes: Routes = [
   {
     path: 'customers',
+    // pathMatch: 'full',
     children: [
       { path: '',
         component: CustomersComponent,
@@ -17,11 +18,13 @@ const routes: Routes = [
       {
         path: 'create',
         component: CustomerAddComponent,
+        pathMatch: 'full',
         data: { title: 'Add Customer' }
       },
       {
         path: ':id',
         component: CustomerDetailComponent,
+        pathMatch: 'full',
         data: { title: 'Customer Details' }
       },
       {
@@ -35,10 +38,6 @@ const routes: Routes = [
         redirectTo: '/customers'
       }
     ]
-  },
-  {
-    path: '**',
-    redirectTo: '/customers'
   }
 ];
 

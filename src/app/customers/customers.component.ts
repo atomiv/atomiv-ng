@@ -25,7 +25,7 @@ export class CustomersComponent implements OnInit {
   displayedColumns: string[] = [
     'id',
     'firstName',
-    'notes', // 'company'
+    'lastName',
     'action'
   ];
 

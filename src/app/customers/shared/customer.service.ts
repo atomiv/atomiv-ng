@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 import { catchError, tap, map } from 'rxjs/operators';
@@ -17,7 +18,7 @@ const apiUrl = `${environment.apiUrl}/api/customers`;
 })
 export class CustomerService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private router: Router, private http: HttpClient) { }
 
   getCustomers (): Observable<ICustomer[]> {
     return this.http.get<ICustomer[]>(apiUrl)
@@ -60,7 +61,12 @@ export class CustomerService {
   }
 
   private handleError<T> (operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
+      // TODO ...
+      // validate if ID exists in DB or json object
+      // this.router.navigate(['/']);
+
+      // TODO check block below
+      return (error: any): Observable<T> => {
 
       // TODO: send the error to remote logging infrastructure
       console.error(error); // log to console instead
@@ -69,7 +75,9 @@ export class CustomerService {
 
       // Let the app keep running by returning an empty result.
       return of(result as T);
+
     };
+
   }
 
 }

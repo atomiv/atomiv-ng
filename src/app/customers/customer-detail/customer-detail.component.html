@@ -3,6 +3,10 @@
     <div *ngIf="isLoadingResults">
       <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
     </div>
+    <div>
+      <!-- back -->
+      <a mat-button color="primary" class="mb-5" [routerLink]="['/customers']"><mat-icon>arrow_back_ios</mat-icon>Back</a>
+    </div>
   
     <div fxLayout="column">
 
@@ -21,44 +25,31 @@
               <span mat-line>{{customer.firstName}}</span>
             </mat-list-item>
             <mat-list-item>
-              <div mat-line>Notes:</div>
-              <span mat-line>Riverpark Drive</span>
+              <div mat-line>Last Name:</div>
+              <span mat-line>{{customer.lastName}}</span>
             </mat-list-item>
             <mat-list-item>
-              <div mat-line>Notes:</div>
-              <span mat-line>Riverpark Drive</span>
-            </mat-list-item>
-            <mat-list-item>
-              <div mat-line>Price:</div>
-              <span mat-line>Paul</span>
-            </mat-list-item>
-            <mat-list-item>
-              <div mat-line>First Name:</div>
-              <span mat-line>{{customer.firstName}}</span>
-            </mat-list-item>
-            <mat-list-item>
-              <div mat-line>Notes:</div>
-              <span mat-line>Riverpark Drive</span>
-            </mat-list-item>
-            <mat-list-item>
-              <div mat-line>Price:</div>
-              <span mat-line>Paul</span>
+              <div mat-line>Email:</div>
+              <span mat-line>{{customer.email}}</span>
             </mat-list-item>
           </mat-list>
         </mat-card-content>
 
         <mat-card-actions>
-          <a mat-raised-button color="primary" [routerLink]="['/customers/edit', customer.id]">
-            <mat-icon>edit</mat-icon>
+          <button mat-flat-button color="primary" class="mr-3" [routerLink]="['/customers/edit', customer.id]">
+            <!-- <mat-icon>edit</mat-icon> -->
             Edit
-          </a>
-          <a mat-raised-button color="primary" (click)="deleteCustomer(customer.id)">
-            <mat-icon>delete</mat-icon>
+          </button>
+          <button mat-stroked-button color="primary" (click)="deleteCustomer(customer.id)">
+            <!-- <mat-icon>delete</mat-icon> -->
             Delete
-          </a>
+          </button>
         </mat-card-actions>
       </mat-card>
     
     </div>
 
   </div>
+
+
+

@@ -4,7 +4,9 @@
 export interface ICustomer {
     id: number;
     firstName: string;
-    notes?: string;
+    lastName: string;
+    email: string;
+    // notes?: string;
     // company: {
     //     name: string;
     // };

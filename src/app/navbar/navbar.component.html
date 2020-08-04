@@ -6,6 +6,7 @@
         <a mat-list-item routerLink="/products" routerLinkActive="active">Products</a>
         <a mat-list-item routerLink="/customers" routerLinkActive="active">Customers</a>
         <a mat-list-item routerLink="/orders" routerLinkActive="active">Orders</a>
+        <a mat-list-item routerLink="/suppliers" routerLinkActive="active">Suppliers</a>
         <!-- TODO check -->
         <a mat-list-item routerLink="/login" *ngIf="!(isLoggedIn$ | async)">
           Login
@@ -36,6 +37,7 @@
             <button mat-button routerLink="/customers" routerLinkActive="active">Customers</button>
             <button mat-button routerLink="/products" routerLinkActive="active">Products</button>
             <button mat-button routerLink="/orders" routerLinkActive="active">Orders</button>
+            <button mat-button routerLink="/suppliers" routerLinkActive="active">Suppliers</button>
 
             <button mat-button routerLink="/login" *ngIf="!(isLoggedIn$ | async)">
               Login

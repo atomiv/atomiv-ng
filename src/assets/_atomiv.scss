@@ -1,7 +1,14 @@
-$atomiv-primary: mat-palette($mat-deep-purple);
-$atomiv-accent: mat-palette($mat-pink);
+$atomiv-primary: mat-palette($mat-indigo);
+// $atomiv-accent: mat-palette($mat-pink);
+$atomiv-accent: mat-palette($mat-cyan);
 $atomiv-warn: mat-palette($mat-red);
 
 $atomiv: mat-light-theme($atomiv-primary, $atomiv-accent, $atomiv-warn);
 
-$lime: #83be2d !default;
+$white: rgb(255, 255, 255) !default;
+$a-gray: #e5e8eb !default;
+// $purple-light: #e2e6ec !default;
+// $purple-light: #666483 !default;
+$purple-light: #c1bdec !default;
+
+

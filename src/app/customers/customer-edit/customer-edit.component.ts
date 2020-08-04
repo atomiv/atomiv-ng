@@ -16,7 +16,8 @@ export class CustomerEditComponent implements OnInit {
 
   id: number;
   firstName: string;
-  notes: string;
+  lastName: string;
+  email: string;
 
   isLoadingResults = false;
 
@@ -27,7 +28,9 @@ export class CustomerEditComponent implements OnInit {
     this.customerForm = this.formBuilder.group({
       'id' : [null, Validators.required],
       'firstName' : [null, Validators.required],
-      'notes' : [null, null]
+      'lastName' : [null, Validators.required],
+      // 'notes' : [null, null]
+      'email' : [null, Validators.required],
     });
   }
 
@@ -37,7 +40,9 @@ export class CustomerEditComponent implements OnInit {
       this.customerForm.setValue({
         id: data.id,
         firstName: data.firstName,
-        notes: data.notes
+        lastName: data.lastName,
+        // notes: data.notes
+        email: data.email
       });
     });
   }

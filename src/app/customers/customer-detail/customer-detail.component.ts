@@ -13,7 +13,8 @@ export class CustomerDetailComponent implements OnInit {
 
   customer: ICustomer = { id: 0,
     firstName: '',
-    notes: ''
+    lastName: '',
+    email: ''
   };
 
   isLoadingResults = true;

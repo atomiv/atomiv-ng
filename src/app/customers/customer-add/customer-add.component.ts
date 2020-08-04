@@ -14,7 +14,8 @@ export class CustomerAddComponent implements OnInit {
   customerForm: FormGroup;
 
   firstName: string;
-  notes: string;
+  lastName: string;
+  email: string;
 
   isLoadingResults = false;
 
@@ -23,7 +24,9 @@ export class CustomerAddComponent implements OnInit {
   ngOnInit() {
     this.customerForm = this.formBuilder.group({
       'firstName' : [null, Validators.required],
-      'notes' : [null, null]
+      'lastName' : [null, Validators.required],
+      'email' : [null, Validators.required],
+      // 'notes' : [null, null]
     });
   }
 
