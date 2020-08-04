@@ -32,8 +32,9 @@
             <img src="./assets/logo-white-fullsize.svg?v=1" height="40" width="" alt="logo">
           </a>
           <!-- TODO: add to show toolbar only if logged in -->
+          <!-- JC -->
           <!-- fxFlex fxLayout fxLayoutAlign="end" fxHide.lt-md *ngIf="isLoggedIn$ | async" -->
-          <div fxFlex fxLayout fxLayoutAlign="end" fxHide.lt-md>
+          <div fxFlex fxLayout fxLayoutAlign="end" fxHide.lt-md *ngIf="isLoggedIn$ | async">
             <button mat-button routerLink="/customers" routerLinkActive="active">Customers</button>
             <button mat-button routerLink="/products" routerLinkActive="active">Products</button>
             <!-- <button mat-button routerLink="/orders" routerLinkActive="active">Orders</button> -->

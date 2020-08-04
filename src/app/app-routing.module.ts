@@ -11,8 +11,9 @@ import { SuppliersComponent } from './suppliers/suppliers.component';
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   // TODO
-  // { path: 'customers', component: CustomersComponent, canActivate: [AuthGuard] },
-  { path: 'customers', component: CustomersComponent },
+  // JC
+  { path: 'customers', component: CustomersComponent, canActivate: [AuthGuard] },
+  // { path: 'customers', component: CustomersComponent },
   { path: 'products', component: ProductsComponent },
   { path: 'orders', component: OrdersComponent },
   { path: 'suppliers', component: SuppliersComponent },

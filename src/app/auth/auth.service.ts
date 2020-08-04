@@ -24,7 +24,7 @@ export class AuthService {
   login(user: User) {
     // if (user.email !== '' && user.password !== '' ) {
     // if (user.email === 'demo' && user.password === 'demo' ) {
-    if (user.email !== '' && user.password !== '' ) {
+    if (user.email === 'demo' && user.password === 'demo' ) {
       this.loggedIn.next(true);
       this.router.navigate(['/']);
     } else {
