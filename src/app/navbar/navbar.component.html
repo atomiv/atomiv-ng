@@ -1,0 +1,64 @@
+<mat-sidenav-container>
+
+    <mat-sidenav #sidenav [autoFocus]="false" mode="over" (click)="sidenav.close()">
+      <mat-nav-list>
+        <button mat-icon-button  (click)="sidenav.toggle()"><mat-icon>close</mat-icon></button>
+        <a mat-list-item routerLink="/products" routerLinkActive="active">Products</a>
+        <a mat-list-item routerLink="/customers" routerLinkActive="active">Customers</a>
+        <a mat-list-item routerLink="/orders" routerLinkActive="active">Orders</a>
+        <a mat-list-item routerLink="/suppliers" routerLinkActive="active">Suppliers</a>
+        <!-- TODO check -->
+        <a mat-list-item routerLink="/login" *ngIf="!(isLoggedIn$ | async)">
+          Login
+        </a>
+        <a mat-list-item (click)="onLogout()" *ngIf="isLoggedIn$ | async">
+          Logout
+        </a>
+      </mat-nav-list>
+    </mat-sidenav>
+  
+    <mat-sidenav-content>
+  
+      <mat-toolbar color="primary" class="mat-elevation-z4">
+        <mat-toolbar-row fxShow="" fxShow.gt-md>
+          <!-- Nav toggle button -->
+          <div fxLayoutAlign="start center" fxFlex.lt-md="33.3%" fxHide="false" fxHide.gt-sm>
+            <button mat-icon-button>
+              <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
+            </button>
+          </div>
+
+          <a fxLayoutAlign="center center" fxLayoutAlign.gt-md="start center" routerLink="/">
+            <img src="./assets/logo-white-fullsize.svg?v=1" height="40" width="" alt="logo">
+          </a>
+          <!-- TODO: add to show toolbar only if logged in -->
+          <!-- JC -->
+          <!-- fxFlex fxLayout fxLayoutAlign="end" fxHide.lt-md *ngIf="isLoggedIn$ | async" -->
+          <div fxFlex fxLayout fxLayoutAlign="end" fxHide.lt-md *ngIf="isLoggedIn$ | async">
+            <button mat-button routerLink="/customers" routerLinkActive="active">Customers</button>
+            <button mat-button routerLink="/products" routerLinkActive="active">Products</button>
+            <!-- <button mat-button routerLink="/orders" routerLinkActive="active">Orders</button> -->
+            <button mat-button routerLink="/suppliers" routerLinkActive="active">Suppliers</button>
+
+            <button mat-button routerLink="/login" *ngIf="!(isLoggedIn$ | async)">
+              Login
+            </button>
+            <button mat-button (click)="onLogout()" *ngIf="isLoggedIn$ | async">
+              Logout
+            </button>
+
+          </div>
+          <button mat-icon-button *ngIf="!isLoggedIn$ | async" fxHide="false" fxHide.gt-sm fxFlex fxLayoutAlign="end">
+            <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
+          </button>
+          
+        </mat-toolbar-row>
+      </mat-toolbar>
+  
+      <div>
+        <router-outlet></router-outlet>
+      </div>
+    </mat-sidenav-content>
+  
+  </mat-sidenav-container>
+  

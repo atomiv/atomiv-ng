@@ -1,0 +1,116 @@
+/* You can add global styles to this file, and also import other style files */
+
+// accent color = white
+
+// prebuilt theme
+// Available pre-built themes are: deeppurple-amber, indigo-pink, pink-bluegrey and purple-green.
+@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+// for Angular Material Theme
+@import '~@angular/material/theming';
+
+// -----------------
+
+// @import  url(https://fonts.googleapis.com/css?family=Open+Sans:400,700);
+
+@include mat-core();
+
+// import our custom theme
+@import 'assets/atomiv.scss';
+
+@include angular-material-theme($atomiv);
+
+// -----------------------------------------------------------------------
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+// -----------------------------------------------------
+// Data Table
+table.mat-table {
+  width: 100%;
+  tbody {
+    tr.mat-row {
+      &:hover {
+        background-color: #ebebf3 !important;
+      }
+      td.mat-cell {
+        // details link
+        a {
+          cursor: pointer;
+        }
+      }
+    }
+    .highlight {
+      background-color: #d4d4e6 !important; // highlighted row // #f6f7f8
+    }
+  }
+}
+
+// -----------------------------------------
+
+// // works
+// // set $font-family
+// $custom-typography: mat-typography-config(
+//   $font-family: 'Segoe UI', // 'Comic Sans MS'
+// );
+
+// // works
+// @include angular-material-typography($custom-typography);
+
+
+
+// Card
+
+.mat-card-actions {
+  padding: 0 10px 10px 10px !important;
+}
+
+.mat-card-header-text {
+  margin: 0 !important;
+}
+
+.mat-list-item-content {
+  padding: 0 !important;
+}
+
+.mat-stroked-button {
+  margin-left: 0 !important;
+}
+
+// < Back - button
+.container .mat-button {
+  padding-left: 0 !important;
+  &:hover, &:focus, &:active, &.active {
+    // background-color: #fafafa !important; // .mat-drawer-container bg-color
+    // background: #fafafa !important;
+    color: mat-color($atomiv-accent) !important;
+  }
+  .mat-ripple, .mat-button-ripple {
+    display: none !important;
+  }
+  .mat-button-focus-overlay {
+    display: none;
+  }
+}
+
+
+
+// Table
+td:focus, td:active, td.active {
+  outline: none;
+}
+
+*:focus, *:active, *.active {
+  outline: none !important;
+}
+
+td a {
+  color: mat-color($atomiv-primary, A200) !important;
+  &:focus, &:active, &.active {
+    color: mat-color($atomiv-accent) !important;
+  }
+}
+
+a {
+  text-decoration: none !important;
+}

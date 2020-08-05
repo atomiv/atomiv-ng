@@ -1,0 +1,86 @@
+<div class="container">
+  
+  <div *ngIf="isLoadingResults">
+    <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+  </div>
+
+  <!-- Search, Filter, Add, Refresh ---------------------------------------------- -->
+  <div fxLayout="row" class="mt-4 mb-3">
+
+    <div fxLayoutGap="2.5rem">
+      <div fxFlex>
+        <mat-form-field>
+          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
+          <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field>
+          <mat-select [(ngModel)]="selectedVersion" #select placeholder="Show" (selectionChange)="applyFilter($event.value)">
+            <mat-option *ngFor="let version of versions" [value]="version.id">
+                {{ version.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div fxFlex fxLayoutAlign="end center" fxLayoutGap="1rem">
+        <!-- Add -->
+        <a mat-raised-button color="accent" [routerLink]="['/suppliers/create']">
+        <mat-icon>add</mat-icon>
+      </a>
+      <!-- TODO -->
+      <!-- refresh button. refresh data source (mat-table) - redo -->
+      <!-- <a mat-raised-button color="primary" (click)="loadData()">
+        <mat-icon>refresh</mat-icon>
+        Refresh
+      </a> -->
+    </div>
+
+
+  </div>
+
+  <!-- Data Table ---------------------------------------------------------------- -->
+  <div [hidden]="!isTableHasData" fxLayout="column">
+
+    <table #table mat-table [dataSource]="dataSource" matSort matSortDisableClear>
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
+        <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+      </ng-container>
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+        <td mat-cell *matCellDef="let row">{{row.name}}</td>
+      </ng-container>
+      <ng-container matColumnDef="city">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>City</th>
+        <td mat-cell *matCellDef="let row">{{row.city}}</td>
+      </ng-container>
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef>Action</th>
+        <td mat-cell *matCellDef="let row" [routerLink]="['/suppliers/', row.id]">
+          <a>Details</a>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; let even = even; columns: displayedColumns;"        
+          [ngClass]="{highlight: selectedRowIndex == row.id}"
+          (click)="highlight(row)">
+      </tr>
+    </table>
+
+    <mat-paginator [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions">
+    </mat-paginator>
+
+  </div>
+
+  <!-- No matching results ------------------------------------- -->
+  <div [hidden]="isTableHasData">No matching results.</div>
+  
+</div>
+
+
+
+<router-outlet></router-outlet>
+

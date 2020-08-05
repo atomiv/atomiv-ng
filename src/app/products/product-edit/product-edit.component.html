@@ -1,0 +1,57 @@
+<div class="container mt-5">
+  <div *ngIf="isLoadingResults">
+    <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+  </div>
+  <div>
+    <!-- back -->
+    <a mat-button color="primary" class="mb-5" [routerLink]="['/products']"><mat-icon>arrow_back_ios</mat-icon>Back</a>
+  </div>
+  <mat-card>
+    <form [formGroup]="productForm" (ngSubmit)="onFormSubmit(productForm.value)">
+      <mat-form-field>
+        <input matInput placeholder="Id" formControlName="id">
+        <mat-error>
+          <span *ngIf="!productForm.get('id').valid && productForm.get('id').touched">Please enter Id</span>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Code" formControlName="code">
+        <mat-error>
+          <span *ngIf="!productForm.get('code').valid && productForm.get('code').touched">Please enter Code</span>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Item" formControlName="item">
+        <mat-error>
+          <span *ngIf="!productForm.get('item').valid && productForm.get('item').touched">Please enter Item</span>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Description" formControlName="description">
+        <mat-error>
+          <span *ngIf="!productForm.get('description').valid && productForm.get('description').touched">Please enter Description</span>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Price" formControlName="price">
+        <mat-error>
+          <span *ngIf="!productForm.get('price').valid && productForm.get('price').touched">Please enter Price</span>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Listed" formControlName="isListed">
+        <mat-error>
+          <span *ngIf="!productForm.get('isListed').valid && productForm.get('isListed').touched">Please enter is it Listed</span>
+        </mat-error>
+      </mat-form-field>
+      <div>
+        <!-- save -->
+        <button type="submit" [disabled]="!productForm.valid" mat-flat-button color="primary" class="mr-3">Save</button>
+        <!-- cancel -->
+        <button mat-stroked-button color="primary" (click)="productDetails()">Cancel</button>
+        <!-- <mat-icon>save</mat-icon> -->
+        <!-- <a mat-flat-button color="primary" (click)="productDetails()"><mat-icon>info</mat-icon></a> -->
+      </div>
+    </form>
+  </mat-card>
+</div>
