@@ -1,3 +1,25 @@
+<div *ngIf="customer">
+  <h1>Orders for {{ customer.firstName }}</h1>
+
+  <table class="table table-hover orders-table" 
+         *ngFor="let order of orders">
+      <tr *ngFor="let orderItem of order.orderItems">
+          <td>{{ orderItem.firstName }}</td>
+          <td>{{ orderItem.notes }}</td>    
+      </tr>
+  </table>
+</div>
+<div *ngIf="!customer">
+ No customer found
+</div>  
+<br />
+<a routerLink="/customers">View All Customers</a>
+
+
+
+
+
+
 <div class="container mt-5">
   
   <div *ngIf="isLoadingResults">
@@ -25,12 +47,8 @@
             <span mat-line>{{order.firstName}}</span>
           </mat-list-item>
           <mat-list-item>
-            <div mat-line>Last Name:</div>
-            <span mat-line>{{order.lastName}}</span>
-          </mat-list-item>
-          <mat-list-item>
-            <div mat-line>Email:</div>
-            <span mat-line>{{order.email}}</span>
+            <div mat-line>Notes:</div>
+            <span mat-line>{{order.notes}}</span>
           </mat-list-item>
         </mat-list>
       </mat-card-content>

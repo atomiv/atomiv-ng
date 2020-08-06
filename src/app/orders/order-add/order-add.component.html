@@ -15,15 +15,9 @@
         </mat-error>
       </mat-form-field>
       <mat-form-field>
-        <input matInput placeholder="Last Name" formControlName="lastName">
+        <input matInput placeholder="Notes" formControlName="notes">
         <mat-error>
-          <span *ngIf="!orderForm.get('lastName').valid && orderForm.get('lastName').touched">Please enter Last Name</span>
-        </mat-error>
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput placeholder="Email" formControlName="email">
-        <mat-error>
-          <span *ngIf="!orderForm.get('email').valid && orderForm.get('email').touched">Please enter Email Address</span>
+          <span *ngIf="!orderForm.get('notes').valid && orderForm.get('notes').touched">Please enter Notes</span>
         </mat-error>
       </mat-form-field>
       

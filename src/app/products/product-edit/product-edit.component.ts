@@ -16,7 +16,7 @@ export class ProductEditComponent implements OnInit {
 
   id: number;
   code: string;
-  item: string;
+  productName: string;
   description: string;
   price: string;
   isListed: string;
@@ -30,7 +30,7 @@ export class ProductEditComponent implements OnInit {
     this.productForm = this.formBuilder.group({
       'id' : [null, Validators.required],
       'code' : [null, Validators.required],
-      'item' : [null, Validators.required],
+      'productName' : [null, Validators.required],
       'description' : [null, Validators.required],
       'price' : [null, Validators.required],
       'isListed' : [null, Validators.required],
@@ -43,7 +43,7 @@ export class ProductEditComponent implements OnInit {
       this.productForm.setValue({
         id: data.id,
         code: data.code,
-        item: data.item,
+        productName: data.productName,
         description: data.description,
         price: data.price,
         isListed: data.isListed

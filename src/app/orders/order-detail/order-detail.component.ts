@@ -1,8 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { OrderService } from '../shared/order.service';
+// jc
 import { IOrder } from '../shared/order';
+import { IOrderItem } from '../shared/order';
+import { ICustomer } from '../../customers/shared/customer';
+import { OrderService } from '../shared/order.service';
+import { CustomerService } from '../../customers/shared/customer.service';
+
+// import { OrderService } from '../shared/order.service';
+// import { IOrder } from '../shared/order';
 
 @Component({
   selector: 'app-order-detail',
@@ -11,16 +18,46 @@ import { IOrder } from '../shared/order';
 })
 export class OrderDetailComponent implements OnInit {
 
+  // jc
+  orders: IOrder[] = [];
+  customer: ICustomer;
+
+  // order: IOrder[] = [];
   order: IOrder = { id: 0,
+    customerId: 0,
     firstName: '',
-    notes: ''
+    notes: '',
+    orderItems: [
+      // id: 0,
+      // firstName: '',
+      // notes: ''
+    ],
   };
 
   isLoadingResults = true;
 
-  constructor(private route: ActivatedRoute, private service: OrderService, private router: Router) { }
+  constructor(
+    private service: OrderService,
+    // jc
+    private customerService: CustomerService,
+    private route: ActivatedRoute,
+    private router: Router) { }
 
   ngOnInit() {
+    // jc
+    const id = +this.route.snapshot.paramMap.get('id');
+
+    // jc
+    this.service.getOrdersByCustomer(id)
+      .subscribe((orders: IOrder[]) => {
+        this.orders = orders;
+      });
+    // jc
+    this.customerService.getCustomer(id).subscribe((customer: ICustomer) => {
+      this.customer = customer;
+    });
+
+
     this.getOrderDetails(this.route.snapshot.params['id']);
   }
 

@@ -34,12 +34,13 @@
           <!-- TODO: add to show toolbar only if logged in -->
           <!-- JC -->
           <!-- fxFlex fxLayout fxLayoutAlign="end" fxHide.lt-md *ngIf="isLoggedIn$ | async" -->
-          <div fxFlex fxLayout fxLayoutAlign="end" fxHide.lt-md *ngIf="isLoggedIn$ | async">
+          <div fxFlex fxLayout fxLayoutAlign="end" fxHide.lt-md >
             <button mat-button routerLink="/customers" routerLinkActive="active">Customers</button>
             <button mat-button routerLink="/products" routerLinkActive="active">Products</button>
-            <!-- <button mat-button routerLink="/orders" routerLinkActive="active">Orders</button> -->
+            <button mat-button routerLink="/orders" routerLinkActive="active">Orders</button>
             <button mat-button routerLink="/suppliers" routerLinkActive="active">Suppliers</button>
 
+            <!-- check -->
             <button mat-button routerLink="/login" *ngIf="!(isLoggedIn$ | async)">
               Login
             </button>

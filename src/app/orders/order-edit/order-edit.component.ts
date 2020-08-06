@@ -49,11 +49,14 @@ export class OrderEditComponent implements OnInit {
       .subscribe(res => {
           this.isLoadingResults = false;
           this.router.navigate(['/orders', id]);
+      // TODO: Remove err, instead use the global handlers
         }, (err) => {
           console.log(err);
           this.isLoadingResults = false;
         }
       );
+
+
   }
 
   orderDetails() {

@@ -15,9 +15,9 @@
         </mat-error>
       </mat-form-field>
       <mat-form-field>
-        <input matInput placeholder="Item" formControlName="item">
+        <input matInput placeholder="Product Name" formControlName="productName">
         <mat-error>
-          <span *ngIf="!productForm.get('item').valid && productForm.get('item').touched">Please enter Item</span>
+          <span *ngIf="!productForm.get('productName').valid && productForm.get('productName').touched">Please enter Product Name</span>
         </mat-error>
       </mat-form-field>
       <mat-form-field>

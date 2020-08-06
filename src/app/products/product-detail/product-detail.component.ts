@@ -14,7 +14,7 @@ export class ProductDetailComponent implements OnInit {
   // TODO --- IMPORTANT -- what details should be below, maybe delete inside { }
   product: IProduct = { id: 0,
     code: '',
-    item: '',
+    productName: '',
     description: '',
     price: '',
     isListed: ''
