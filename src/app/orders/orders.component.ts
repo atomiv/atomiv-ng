@@ -32,6 +32,7 @@ export class OrdersComponent implements OnInit {
 
   displayedColumns: string[] = [
     'id',
+    'customerId',
     'firstName',
     'totalPrice',
     'action'

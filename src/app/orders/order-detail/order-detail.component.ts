@@ -21,6 +21,7 @@ export class OrderDetailComponent implements OnInit {
   order: IOrder;
   orders: IOrder[] = [];
   customer: ICustomer;
+  customers: ICustomer[] = [];
   products: IProduct[] = [];
 
   isLoadingResults = true;
@@ -34,31 +35,39 @@ export class OrderDetailComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
-    // jc
-    const id = +this.route.snapshot.paramMap.get('id');
+
+    this.getOrderDetails(this.route.snapshot.params['id']);
 
     // jc
-    this.service.getOrdersByCustomer(id)
-      .subscribe((orders: IOrder[]) => {
-        this.orders = orders;
-        // added below
-        console.log(this.orders);
-        this.isLoadingResults = false;
-      });
+    // const id = +this.route.snapshot.paramMap.get('id');
+
     // jc
-    this.customerService.getCustomer(id)
-      .subscribe((customer: ICustomer) => {
-        this.customer = customer;
+    // this.service.getOrdersByCustomer(id)
+    //   .subscribe((orders: IOrder[]) => {
+    //     this.orders = orders;
+    //     // added below
+    //     console.log(this.orders);
+    //     this.isLoadingResults = false;
+    //   });
+    // jc
+    // this.customerService.getCustomer(id)
+    //   .subscribe((customer: ICustomer) => {
+    //     this.customer = customer;
+    //   });
+
+    // jc
+    this.customerService.getCustomers()
+      .subscribe((customers: ICustomer[]) => {
+        this.customers = customers;
       });
+
     // jc
     this.productService.getProducts()
       .subscribe((products: IProduct[]) => {
         this.products = products;
       });
 
-
-    this.getOrderDetails(this.route.snapshot.params['id']);
-  }
+    }
 
   getOrderDetails(id) {
     this.service.getOrder(id)
