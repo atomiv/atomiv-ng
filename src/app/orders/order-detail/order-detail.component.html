@@ -1,11 +1,11 @@
 <div *ngIf="customer">
-  <h1>Orders for {{ customer.firstName }}</h1>
+  <h1>Orders for {{ customer.firstName }} {{ customer.lastName }}</h1>
 
   <table class="table table-hover orders-table" 
          *ngFor="let order of orders">
       <tr *ngFor="let orderItem of order.orderItems">
-          <td>{{ orderItem.firstName }}</td>
-          <td>{{ orderItem.notes }}</td>    
+          <td>{{ orderItem.productId }}</td>
+          <td>{{ orderItem.quantity }}</td>    
       </tr>
   </table>
 </div>
@@ -16,12 +16,9 @@
 <a routerLink="/customers">View All Customers</a>
 
 
-
-
-
-
 <div class="container mt-5">
   
+  <!-- is Loading Results spinner necessary -->
   <div *ngIf="isLoadingResults">
     <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
   </div>
@@ -30,41 +27,81 @@
     <a mat-button color="primary" class="mb-5" [routerLink]="['/orders']"><mat-icon>arrow_back_ios</mat-icon>Back</a>
   </div>
 
-  <div fxLayout="column">
+  <div fxLayout="column" *ngIf="customer">
 
-    <mat-card>
+    <div *ngFor="let order of orders">
+      <mat-card *ngFor="let orderItem of order.orderItems">
 
-      <mat-card-header>
-        <mat-card-title>
-          Id: {{order.id}}
-        </mat-card-title>
-      </mat-card-header>
-
-      <mat-card-content>
-        <mat-list>
-          <mat-list-item>
-            <div mat-line>First Name:</div>
-            <span mat-line>{{order.firstName}}</span>
-          </mat-list-item>
-          <mat-list-item>
-            <div mat-line>Notes:</div>
-            <span mat-line>{{order.notes}}</span>
-          </mat-list-item>
-        </mat-list>
-      </mat-card-content>
-
-      <mat-card-actions>
-        <button mat-flat-button color="primary" class="mr-3" [routerLink]="['/orders/edit', order.id]">
-          <!-- <mat-icon>edit</mat-icon> -->
-          Edit
-        </button>
-        <button mat-stroked-button color="primary" (click)="deleteOrder(order.id)">
-          <!-- <mat-icon>delete</mat-icon> -->
-          Delete
-        </button>
-      </mat-card-actions>
-    </mat-card>
+        <mat-card-header>
+          <mat-card-title>
+            Id: {{ orderItem.id }}
+          </mat-card-title>
+        </mat-card-header>
   
+        <mat-card-content>
+          <mat-list>
+            <mat-list-item>
+              <div mat-line>First Name:</div>
+              <span mat-line>{{ customer.firstName }}</span>
+            </mat-list-item>
+            <mat-list-item>
+              <div mat-line>Last Name:</div>
+              <span mat-line>{{ customer.lastName }}</span>
+            </mat-list-item>
+            <mat-list-item>
+              <div mat-line>Product Id:</div>
+              <span mat-line>{{ orderItem.productId }}</span>
+            </mat-list-item>
+            <mat-list-item>
+              <div mat-line>Product Name:</div>
+              <div mat-line *ngFor="let product of products">
+                <div *ngIf="product.id === orderItem.productId">
+                  {{ product.productName}}
+                </div>
+              </div>
+            </mat-list-item>
+            <mat-list-item>
+              <div mat-line>Quantity:</div>
+              <span mat-line>{{ orderItem.quantity }}</span>
+            </mat-list-item>
+            <mat-list-item>
+              <div mat-line>Product Price:</div>
+              <div mat-line *ngFor="let product of products">
+                <div *ngIf="product.id === orderItem.productId">
+                  {{ product.price}} EUR
+                </div>
+              </div>
+            </mat-list-item>
+            <!-- orderTotal -->
+            <mat-list-item>
+              <div mat-line>Order Total:</div>
+              <div mat-line *ngFor="let product of products">
+                <div *ngIf="product.id === orderItem.productId">
+                  {{ product.price * orderItem.quantity }} EUR
+                </div>
+              </div>
+            </mat-list-item>
+          </mat-list>
+        </mat-card-content>
+  
+        <mat-card-actions>
+          <button mat-flat-button color="primary" class="mr-3" [routerLink]="['/orders/edit', order.id]">
+            <!-- <mat-icon>edit</mat-icon> -->
+            Edit
+          </button>
+          <button mat-stroked-button color="primary" (click)="deleteOrder(order.id)">
+            <!-- <mat-icon>delete</mat-icon> -->
+            Delete
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  
+  </div>
+
+  <!-- No results -->
+  <div *ngIf="!customer">
+    No customer found
   </div>
 
 </div>

@@ -3,8 +3,6 @@
 export interface IOrder {
     id: number;
     customerId: number;
-    firstName: string;
-    notes?: string;
     orderItems: IOrderItem[];
 }
 
@@ -12,6 +10,6 @@ export interface IOrder {
 
 export interface IOrderItem {
     id: number;
-    firstName: string;
-    notes?: string;
+    productId: number;
+    quantity: number;
 }

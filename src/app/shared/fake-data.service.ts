@@ -13,54 +13,71 @@ export class FakeDataService implements InMemoryDbService {
 
   createDb() {
     const customers = [
-      { id: 0,
+      { id: 1,
       firstName: 'Paul',
       lastName: 'Michels',
       email: 'paul.michels@gmail.com' },
 
-      { id: 1, firstName: 'John', lastName: 'Adams', email: 'j.adams@gmail.com' },
-      { id: 2, firstName: 'Helen', lastName: 'David', email: 'h.david@gmail.com' },
-      { id: 3, firstName: 'Kate', lastName: 'Johnson', email: 'kate@gmail.com' },
-      { id: 4, firstName: 'Mark', lastName: 'Daniels', email: 'mark@hotmail.com' },
-      { id: 5, firstName: 'Alison', lastName: 'Twain', email: 'alison@yahoo.com' },
-      { id: 6, firstName: 'Mary', lastName: 'Daniels', email: 'mary@gmail.com' },
-      { id: 7, firstName: 'John', lastName: 'Daniels', email: 'j.damniels@gmail.com' },
-      { id: 8, firstName: 'David', lastName: 'Adams', email: 'david.adams@gmail.com' },
-      { id: 9, firstName: 'Daniel', lastName: 'Smith', email: 'daniel.smith@gmail.com' },
-      { id: 10, firstName: 'Jil', lastName: 'Smith', email: 'jil.smith@gmail.com' },
-      { id: 11, firstName: 'Susan', lastName: 'Damon', email: 'susan@yahoo.com' },
-      { id: 12, firstName: 'Amy', lastName: 'Johnson', email: 'amy.johnson@gmail.com' },
-      { id: 13, firstName: 'Ana', lastName: 'Daniels', email: 'ana.daniels@hotmail.com' },
-      { id: 14, firstName: 'James', lastName: 'Wilson', email: 'james.wilson@yahoo.com' },
+      { id: 2, firstName: 'John', lastName: 'Adams', email: 'j.adams@gmail.com' },
+      { id: 3, firstName: 'Helen', lastName: 'David', email: 'h.david@gmail.com' },
+      { id: 4, firstName: 'Kate', lastName: 'Johnson', email: 'kate@gmail.com' },
+      { id: 5, firstName: 'Mark', lastName: 'Daniels', email: 'mark@hotmail.com' },
+      { id: 6, firstName: 'Alison', lastName: 'Twain', email: 'alison@yahoo.com' },
+      { id: 7, firstName: 'Mary', lastName: 'Daniels', email: 'mary@gmail.com' },
+      { id: 8, firstName: 'John', lastName: 'Daniels', email: 'j.damniels@gmail.com' },
+      { id: 9, firstName: 'David', lastName: 'Adams', email: 'david.adams@gmail.com' },
+      { id: 10, firstName: 'Daniel', lastName: 'Smith', email: 'daniel.smith@gmail.com' },
+      { id: 11, firstName: 'Jil', lastName: 'Smith', email: 'jil.smith@gmail.com' },
+      { id: 12, firstName: 'Susan', lastName: 'Damon', email: 'susan@yahoo.com' },
+      { id: 13, firstName: 'Amy', lastName: 'Johnson', email: 'amy.johnson@gmail.com' },
+      { id: 14, firstName: 'Ana', lastName: 'Daniels', email: 'ana.daniels@hotmail.com' },
+      { id: 15, firstName: 'James', lastName: 'Wilson', email: 'james.wilson@yahoo.com' },
     ];
 
+    // €
     const products = [
-      { id: 0, code: 'C145', productName: 'Televsion set', description: 'High quality product', price: '1 000 €', isListed: 'YES' },
-      { id: 1, code: 'C882', productName: 'Mobile Phone', description: 'Black case cover', price: '200 €', isListed: 'YES' },
-      { id: 2, code: 'T125', productName: 'Keyboard', description: 'Suiatble for use in EU', price: '100 €', isListed: 'YES' },
-      { id: 3, code: 'T445', productName: 'Speakers', description: 'Available in red and black', price: '150 €', isListed: 'NO' },
-      { id: 4, code: 'T543', productName: 'Laptop', description: 'High screen resolution', price: '800 €', isListed: 'YES' },
-      { id: 5, code: 'T857', productName: 'Mobile Screen', description: 'Good quality', price: '100 €', isListed: 'YES' },
+      { id: 1, code: 'C145', productName: 'Televsion set', description: 'High quality product', price: 1000, isListed: 'YES' },
+      { id: 2, code: 'C882', productName: 'Mobile Phone', description: 'Black case cover', price: 200, isListed: 'YES' },
+      { id: 3, code: 'T125', productName: 'Keyboard', description: 'Suiatble for use in EU', price: 100, isListed: 'YES' },
+      { id: 4, code: 'T445', productName: 'Speakers', description: 'Available in red and black', price: 150, isListed: 'NO' },
+      { id: 5, code: 'T543', productName: 'Laptop', description: 'High screen resolution', price: 800, isListed: 'YES' },
+      { id: 6, code: 'T857', productName: 'Mobile Screen', description: 'Good quality', price: 100, isListed: 'YES' },
     ];
 
     const orders = [
-      // { id: 2, customerId: 1, firstName: 'order2', notes: '01' },
-      // { id: 3, customerId: 3, firstName: 'order3', notes: '02' },
-      // { id: 4, customerId: 14, firstName: 'order4', notes: '03' },
-
 
       {
-        customerId: 0,
+        id: 4,
+        customerId: 1,
         orderItems: [
-          { id: 1, firstName: 'swimming pool', notes: '$22' },
-          { id: 2, firstName: 'hotel spa', notes: '$200' }
+          // productName, price
+          { id: 1, productId: 5, quantity: 2 },
+          { id: 2, productId: 3, quantity: 1 },
         ]
       },
       {
+        id: 5,
         customerId: 1,
         orderItems: [
-          { id: 1, firstName: 'resort', notes: '$1000' },
-          { id: 2, firstName: 'mint leaves', notes: '$20' }
+          // productName, price
+          { id: 1, productId: 5, quantity: 200 },
+          { id: 2, productId: 3, quantity: 100 },
+        ]
+      },
+      {
+        id: 1,
+        customerId: 3,
+        orderItems: [
+          { id: 1, productId: 1, quantity: 4 },
+          { id: 2, productId: 3, quantity: 2 },
+        ]
+      },
+      {
+        id: 2,
+        customerId: 2,
+        orderItems: [
+          { id: 1, productId: 5, quantity: 12 },
+          { id: 2, productId: 6, quantity: 10 },
         ]
       }
     ];

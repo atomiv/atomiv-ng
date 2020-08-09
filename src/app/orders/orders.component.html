@@ -1,27 +1,3 @@
-<div *ngIf="customer">
-  <h1>Orders for {{ customer.firstName }}</h1>
-
-  <table class="table table-hover orders-table" 
-         *ngFor="let order of orders">
-      <tr *ngFor="let orderItem of order.orderItems">
-          <td>{{ orderItem.firstName }}</td>
-          <td>{{ orderItem.notes }}</td>    
-      </tr>
-  </table>
-</div>
-<div *ngIf="!customer">
- No customer found
-</div>  
-<br />
-<a routerLink="/customers">View All Customers</a>
-
-
-
-<button class=""
-  *ngFor="let coffee of coffees">
-  {{ coffee }}
-</button>
-
 <div class="container">
   
   <div *ngIf="isLoadingResults">
@@ -66,32 +42,57 @@
   </div>
 
   <!-- Data Table ---------------------------------------------------------------- -->
+  
   <div [hidden]="!isTableHasData" fxLayout="column">
 
     <table #table mat-table [dataSource]="dataSource" matSort matSortDisableClear>
       <ng-container matColumnDef="id">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
-        <td mat-cell *matCellDef="let row"> {{row.id}} </td>
-      </ng-container>
-      <ng-container matColumnDef="customerId">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Customer Id</th>
-        <!-- <td mat-cell *matCellDef="let row">{{row.customerId}}</td> -->
-        <td mat-cell *matCellDef="let row">{{row.cust}}</td>
+        <td mat-cell *matCellDef="let row">{{ row.customerId }}</td>
       </ng-container>
+
       <ng-container matColumnDef="firstName">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>First Name</th>
-        <td mat-cell *matCellDef="let row">{{row.firstName}}</td>
-      </ng-container>
-      <ng-container matColumnDef="notes">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Notes</th>
-        <td mat-cell *matCellDef="let row">{{row.notes}}</td>
-      </ng-container>
-      <ng-container matColumnDef="action">
-        <th mat-header-cell *matHeaderCellDef>Action</th>
-        <td mat-cell *matCellDef="let row" [routerLink]="['/orders/', row.id]">
-          <a>Details</a>
+        <th mat-header-cell *matHeaderCellDef>Customer Name</th>
+        <td mat-cell *matCellDef="let row">
+            <!-- {{ row.customerName }} -->
+            <!-- {{ row.customerId }} -->
+            <div *ngIf="customers">
+              <div *ngFor="let customer of customers">
+                <div *ngIf="customer.id === row.customerId ">
+                  {{ customer.firstName }} {{ customer.lastName }}
+                </div>  
+              </div>
+            </div>
         </td>
       </ng-container>
+
+      <!-- <ng-container matColumnDef="notes">
+        <th mat-header-cell *matHeaderCellDef>Notes</th>
+        <td mat-cell *matCellDef="let row">
+          <ng-container *ngFor="let orderItem of row.orderItems">
+            {{ orderItem.notes }}
+          </ng-container>
+        </td>
+      </ng-container> -->
+
+      <ng-container matColumnDef="totalPrice">
+        <th mat-header-cell *matHeaderCellDef>Total Price</th>
+        <td mat-cell *matCellDef="let row">
+          <ng-container *ngFor="let orderItem of row.orderItems">
+            {{ orderItem.totalPrice }}
+          </ng-container>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef>Action</th>
+        <td mat-cell *matCellDef="let row" [routerLink]="['/orders/', row.id ]">
+          <a>View Order</a>
+        </td>
+      </ng-container>
+
+
+
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; let even = even; columns: displayedColumns;"        
           [ngClass]="{highlight: selectedRowIndex == row.id}"

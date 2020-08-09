@@ -10,6 +10,7 @@ import { CustomerAddComponent } from './customer-add/customer-add.component';
 import { CustomerDetailComponent } from './customer-detail/customer-detail.component';
 import { CustomerEditComponent } from './customer-edit/customer-edit.component';
 import { CustomersRoutingModule } from './customers-routing.module';
+import { CustomerOrdersComponent } from './customer-orders/customer-orders.component';
 
 
 @NgModule({
@@ -26,6 +27,7 @@ import { CustomersRoutingModule } from './customers-routing.module';
     CustomerAddComponent,
     CustomerDetailComponent,
     CustomerEditComponent,
+    CustomerOrdersComponent,
   ],
   exports: [
     CustomersComponent,

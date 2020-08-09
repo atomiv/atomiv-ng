@@ -5,11 +5,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { IOrder } from '../shared/order';
 import { IOrderItem } from '../shared/order';
 import { ICustomer } from '../../customers/shared/customer';
+import { IProduct } from '../../products/shared/product';
 import { OrderService } from '../shared/order.service';
 import { CustomerService } from '../../customers/shared/customer.service';
-
-// import { OrderService } from '../shared/order.service';
-// import { IOrder } from '../shared/order';
+import { ProductService } from '../../products/shared/product.service';
 
 @Component({
   selector: 'app-order-detail',
@@ -19,20 +18,10 @@ import { CustomerService } from '../../customers/shared/customer.service';
 export class OrderDetailComponent implements OnInit {
 
   // jc
+  order: IOrder;
   orders: IOrder[] = [];
   customer: ICustomer;
-
-  // order: IOrder[] = [];
-  order: IOrder = { id: 0,
-    customerId: 0,
-    firstName: '',
-    notes: '',
-    orderItems: [
-      // id: 0,
-      // firstName: '',
-      // notes: ''
-    ],
-  };
+  products: IProduct[] = [];
 
   isLoadingResults = true;
 
@@ -40,6 +29,7 @@ export class OrderDetailComponent implements OnInit {
     private service: OrderService,
     // jc
     private customerService: CustomerService,
+    private productService: ProductService,
     private route: ActivatedRoute,
     private router: Router) { }
 
@@ -51,11 +41,20 @@ export class OrderDetailComponent implements OnInit {
     this.service.getOrdersByCustomer(id)
       .subscribe((orders: IOrder[]) => {
         this.orders = orders;
+        // added below
+        console.log(this.orders);
+        this.isLoadingResults = false;
       });
     // jc
-    this.customerService.getCustomer(id).subscribe((customer: ICustomer) => {
-      this.customer = customer;
-    });
+    this.customerService.getCustomer(id)
+      .subscribe((customer: ICustomer) => {
+        this.customer = customer;
+      });
+    // jc
+    this.productService.getProducts()
+      .subscribe((products: IProduct[]) => {
+        this.products = products;
+      });
 
 
     this.getOrderDetails(this.route.snapshot.params['id']);
@@ -70,6 +69,8 @@ export class OrderDetailComponent implements OnInit {
       });
   }
 
+
+  // TODO - add this to services file
   deleteOrder(id) {
     this.isLoadingResults = true;
     this.service.deleteOrder(id)

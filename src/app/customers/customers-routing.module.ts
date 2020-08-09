@@ -5,6 +5,7 @@ import { CustomersComponent } from './customers.component';
 import { CustomerAddComponent } from './customer-add/customer-add.component';
 import { CustomerDetailComponent } from './customer-detail/customer-detail.component';
 import { CustomerEditComponent } from './customer-edit/customer-edit.component';
+import { CustomerOrdersComponent } from './customer-orders/customer-orders.component';
 
 const routes: Routes = [
   {
@@ -31,6 +32,12 @@ const routes: Routes = [
         path: 'edit/:id',
         component: CustomerEditComponent,
         data: { title: 'Edit Customer' }
+      },
+      {
+      // customers/1/orders
+      path: ':id/orders',
+        component: CustomerOrdersComponent,
+        data: { title: 'Customer Orders' }
       },
       // TODO fixup
       {

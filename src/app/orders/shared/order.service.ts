@@ -7,6 +7,7 @@ import { environment } from '../../../environments/environment';
 import { IOrder } from './order';
 import { ICustomer } from '../../customers/shared/customer';
 
+
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
 };
@@ -45,8 +46,6 @@ export class OrderService {
         tap(_ => console.log('fetched orders')),
         catchError(this.handleError<IOrder[]>('getOrders', []))
       );
-
-
   }
 
   getOrder(id: number): Observable<IOrder> {
@@ -61,6 +60,8 @@ export class OrderService {
   // REST API: /api/orders?customerId=5 (VC preferred)
   // REST API: /api/customers/5/orders
 
+  // view all customer orders
+  // moved to customer service
   getOrdersByCustomer(id: number): Observable<IOrder[]> {
     return this.http.get<IOrder[]>(`/api/orders`)
     .pipe (
@@ -71,6 +72,18 @@ export class OrderService {
       catchError(this.handleError)
     );
   }
+
+  // jc
+  // getProductsByOrder(id: number): Observable<IProduct[]> {
+  //   return this.http.get<IProduct[]>(`/api/products`)
+  //   .pipe (
+  //     map(products => {
+  //       const custOrders = products.filter((order: IOrder) => order.customerId === id);
+  //       return custOrders;
+  //     }),
+  //     catchError(this.handleError)
+  //   );
+  // }
 
   addOrder (order): Observable<IOrder> {
     return this.http.post<IOrder>(apiUrl, order, httpOptions).pipe(

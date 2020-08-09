@@ -26,8 +26,7 @@ export class OrderEditComponent implements OnInit {
     this.getOrder(this.route.snapshot.params['id']);
     this.orderForm = this.formBuilder.group({
       'id' : [null, Validators.required],
-      'firstName' : [null, Validators.required],
-      'notes' : [null, null]
+      'customerId' : [null, null],
     });
   }
 
@@ -36,8 +35,7 @@ export class OrderEditComponent implements OnInit {
       this.id = data.id;
       this.orderForm.setValue({
         id: data.id,
-        firstName: data.firstName,
-        notes: data.notes
+        customerId: data.customerId // JC
       });
     });
   }

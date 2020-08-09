@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 // jc
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import { zip } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IOrder } from './shared/order';
-import { IOrderItem } from './shared/order';
 import { ICustomer } from '../customers/shared/customer';
 import { OrderService } from './shared/order.service';
 import { CustomerService } from '../customers/shared/customer.service';
@@ -19,9 +19,9 @@ import { MatTableDataSource } from '@angular/material/table';
 export class OrdersComponent implements OnInit {
 
   // jc
-  orders: IOrder[] = [];
-  customer: ICustomer;
-
+  // order: IOrder;
+  // orders: IOrder[] = [];
+  customers: ICustomer[] = [];
 
   selectedRowIndex = -1;
 
@@ -32,15 +32,9 @@ export class OrdersComponent implements OnInit {
 
   displayedColumns: string[] = [
     'id',
-    'customerId',
     'firstName',
-    'notes',
+    'totalPrice',
     'action'
-  ];
-
-  // JC
-  coffees = [
-    'Flat White', 'Cappuccino', 'Latte', 'Espresso'
   ];
 
   versions = [
@@ -54,14 +48,12 @@ export class OrdersComponent implements OnInit {
 
   dataSource = new MatTableDataSource<IOrder>();
 
-
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   constructor(private service: OrderService,
-    // jc
     private customerService: CustomerService,
-    private route: ActivatedRoute ) { }
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
     // jc
@@ -69,19 +61,16 @@ export class OrdersComponent implements OnInit {
 
     this.loadData();
 
-    // jc
-    this.service.getOrdersByCustomer(id).subscribe((orders: IOrder[]) => {
-      this.orders = orders;
-    });
-    // jc
-    this.customerService.getCustomer(id).subscribe((customer: ICustomer) => {
-      this.customer = customer;
-    });
-
     // TODO: Future: Localtional and internationalization
     // Languages (English, Serbian) and language selector
     // and it would have different currency and date and number formatting
     // https://phrase.com/blog/posts/angular-localization-i18n/
+
+    // ALL CUSTOMERS
+    this.customerService.getCustomers()
+    .subscribe((customers: ICustomer[]) => {
+      this.customers = customers;
+    });
 
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
@@ -92,7 +81,6 @@ export class OrdersComponent implements OnInit {
   }
 
   loadData() {
-
     this.service.getOrders()
     .subscribe((res: IOrder[]) => {
       this.dataSource.data = res;
@@ -102,17 +90,13 @@ export class OrdersComponent implements OnInit {
       console.log(err);
       this.isLoadingResults = false;
     });
-
   }
 
-
+  // this.isTableHasData = this.dataSource.filteredData.length > 0;
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim()
     .toLowerCase();
     this.dataSource.filter = filterValue;
-
-// this.isTableHasData = this.dataSource.filteredData.length > 0;
-
     if (this.dataSource.filteredData.length > 0) {
       this.isTableHasData = true;
     } else {

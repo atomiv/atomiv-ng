@@ -6,6 +6,7 @@ import { catchError, tap, map } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 
 import { ICustomer } from '../shared/customer';
+import { IOrder } from '../../orders/shared/order';
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -19,6 +20,18 @@ const apiUrl = `${environment.apiUrl}/api/customers`;
 export class CustomerService {
 
   constructor(private router: Router, private http: HttpClient) { }
+
+  // view all customer orders
+  getOrdersByCustomer(id: number): Observable<IOrder[]> {
+    return this.http.get<IOrder[]>(`/api/orders`)
+    .pipe (
+      map(orders => {
+        const custOrders = orders.filter((order: IOrder) => order.customerId === id);
+        return custOrders;
+      }),
+      catchError(this.handleError)
+    );
+  }
 
   getCustomers (): Observable<ICustomer[]> {
     return this.http.get<ICustomer[]>(apiUrl)

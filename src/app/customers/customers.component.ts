@@ -1,6 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+// jc
+import { ActivatedRoute, Router } from '@angular/router';
 import { ICustomer } from './shared/customer';
 import { CustomerService } from './shared/customer.service';
+import { IOrder } from '../orders/shared/order';
+import { OrderService } from '../orders/shared/order.service';
 
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -13,6 +17,8 @@ import { MatTableDataSource } from '@angular/material/table';
   styleUrls: ['./customers.component.scss']
 })
 export class CustomersComponent implements OnInit {
+  orders: IOrder[] = [];
+
   selectedRowIndex = -1;
 
   // MatPaginator Inputs
@@ -26,6 +32,7 @@ export class CustomersComponent implements OnInit {
     'id',
     'firstName',
     'lastName',
+    'viewOrders',
     'action'
   ];
 
@@ -43,10 +50,21 @@ export class CustomersComponent implements OnInit {
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
-  constructor(private service: CustomerService) { }
+  constructor(
+    private service: CustomerService,
+    private orderService: OrderService,
+    private route: ActivatedRoute ) { }
 
   ngOnInit() {
+    const id = +this.route.snapshot.paramMap.get('id');
+
     this.loadData();
+
+    // jc
+    this.orderService.getOrdersByCustomer(id)
+      .subscribe((orders: IOrder[]) => {
+        this.orders = orders;
+      });
 
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
