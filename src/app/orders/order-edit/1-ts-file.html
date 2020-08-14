@@ -17,6 +17,34 @@ import { ICustomer } from '../../customers/shared/customer';
 })
 export class OrderEditComponent implements OnInit {
 
+  public auxConfigform: FormGroup;
+  AUX = [
+    {
+      Description: "asd",
+      TempSensor: true,
+      SpaceAvg: false,
+      SwitchStatus: false
+    },
+    {
+      Description: "",
+      TempSensor: true,
+      SpaceSnr: true,
+      SwitchStatus: false
+    },
+  ];
+  auxGroup: FormArray;
+
+
+// ------------------
+  form: FormGroup;
+  showLabel = [];
+
+  options: any = [ 
+    { "key" : "set", "value": "Set" },
+    { "key" : "wait", "value": "Wait" },
+    { "key" : "go", "value": "Go" }
+    ];
+
 // -------------------------
   // jc
   order: IOrder;
@@ -27,8 +55,21 @@ export class OrderEditComponent implements OnInit {
   customer: ICustomer;
 
   orderForm: FormGroup;
-  // hobb: FormArray;
+  // dataPreloaded = [{
+  //   id: 1,
+  //   quantity: 500
+  // },
+  // {
+  //   id: 2,
+  //   quantity: 600
+  // }];
 
+
+
+  //
+  orderItemsGroup: FormArray;
+  //
+  items: FormArray;
 
   // below not used
   id: number;
@@ -48,18 +89,43 @@ export class OrderEditComponent implements OnInit {
 
   ngOnInit() {
 
+
     // jc
     this.getOrderDetails(this.route.snapshot.params['id']);
 
     this.getOrder(this.route.snapshot.params['id']);
 
 
+
+    const arryOfAuxGroup = this.AUX.map(item => {
+      return this.createauxGroup(
+        item.Description,
+        item.TempSensor,
+        item.SpaceAvg,
+        item.SwitchStatus
+      );
+    });
+    this.auxConfigform = this.formBuilder.group({
+      aux: this.formBuilder.array(arryOfAuxGroup)
+    });
+
+
+
+    this.form = this.formBuilder.group({
+      credentials: this.formBuilder.array([]),
+    });
+
+
     this.orderForm = this.formBuilder.group({
       'id' : [null, Validators.required],
       'customerId' : [null, null],
-      orderItems: this.formBuilder.array([
-        // this.addOrderItem()
-      ]),
+      orderItems: this.formBuilder.array([]),
+      // orderItems form group
+      // orderItems2: this.formBuilder.group({
+      //     id: [null, null],
+      //     // name: ['', [Validators.maxLength(500)]]
+      //     quantity: [null, null]
+      //   }),
 
       // Our items instance is a form array instead of a form control, and we’re calling
       // a createItem method to create a form group as the first item in our array
@@ -80,7 +146,6 @@ export class OrderEditComponent implements OnInit {
 
     // readonly !!!
     // this.orderForm.controls['id'].disable();
-    // this.orderForm.get('id').disable();
 
 
     // this.loadOrderItems();
@@ -91,7 +156,7 @@ export class OrderEditComponent implements OnInit {
   // ------------------------------------
   // loadOrderItems() {
 
-    // const hobb = this.orderForm.controls.orderItems as FormArray;
+  //   const hobb = this.orderForm.controls.orderItems as FormArray;
 
   //   this.dataPreloaded.forEach( orderItem => {
   //     hobb.push(this.formBuilder.group({
@@ -101,30 +166,74 @@ export class OrderEditComponent implements OnInit {
   //   });
   // }
 
-  get hobb(): FormArray {
-    return this.orderForm.get('orderItems') as FormArray;
-  }
 
-  addOrderItem() {
-    // const hobb = this.orderForm.controls.orderItems as FormArray;
-    // added 'this.push' instead of 'push' when removed const above
-    this.hobb.push(this.formBuilder.group({
+  addOrderItems() {
+    const hobb = this.orderForm.controls.orderItems as FormArray;
+    hobb.push(this.formBuilder.group({
       id: '',
       quantity: '',
     }));
   }
-
-  removeOrderItem(i: number) {
-    this.hobb.removeAt(i);
+  // ------------------------------------------------
+  get auxArray() {
+    return this.auxConfigform.get('aux')['controls'] as FormArray;
+  }
+  createauxGroup(description, tempSensor, spaceAvg, switchStatus) {
+    return this.formBuilder.group({
+      description: [description, Validators.maxLength(50)],
+      tempSensor: [tempSensor],
+      spaceAvg: [spaceAvg],
+      switchStatus: [switchStatus]
+    });
+  }
+  // -----------------------------------------------
+  addCreds() {
+    const creds = this.form.controls.credentials as FormArray;
+    creds.push(this.formBuilder.group({
+      action: '',
+      name: '',
+      label: {disabled: true, value: ""}
+    }));
   }
 
+  changeAction(e, index) {
+    console.log(e, index);
+    if(e === 'set' || e === 'go') {
+
+      // this.form
+    //  this.form.get('credentials').at(index).get('label').enable();
+      // this.form.get('lable').enable
+    } else {
+      this.showLabel[index] = false;
+      // this.form.get('credentials').at(index).get('label').disable();
+    }
+  }
+
+  trackFn(index) {
+    return index;
+  }
   // ------------------------------------------------
+
+  // // just write orderItems(): FormArray
+  // get orderItems(): FormArray {
+  //   return this.orderForm.get('orderItems') as FormArray;
+  // }
+
   // // createItem
   // newOrderItem(): FormGroup {
   //   return this.formBuilder.group({
   //     id: '',
   //     quantity: ''
   //   });
+  // }
+
+  // addOrderItem() {
+  //   // this.arr = this.myForm.get('arr') as FormArray;
+  //   this.orderItems.push(this.newOrderItem());
+  // }
+
+  // removeOrderItem(i: number) {
+  //   this.orderItems.removeAt(i);
   // }
 
   // onSubmit() {
@@ -148,7 +257,7 @@ export class OrderEditComponent implements OnInit {
     this.service.getOrder(id).subscribe(data => {
       this.id = data.id;
 
-      // const hobb = this.orderForm.controls.orderItems as FormArray;
+      const hobb = this.orderForm.controls.orderItems as FormArray;
 
       // mmm ... get form array reference
       // const orderItems = this.orderForm.get('orderItems') as FormArray;
@@ -156,6 +265,9 @@ export class OrderEditComponent implements OnInit {
       // while (orderItems.length) {
       //   orderItems.removeAt(0);
       // }
+
+
+
 
       // patchValue setValue
       this.orderForm.patchValue(
@@ -184,7 +296,7 @@ export class OrderEditComponent implements OnInit {
       );
       // data.orderItems.forEach(orderItem => orderItems.push(this.formBuilder.group(orderItem)));
       data.orderItems.forEach( orderItem => {
-        this.hobb.push(this.formBuilder.group({
+        hobb.push(this.formBuilder.group({
           // orderItem
           id: orderItem.id,
           quantity: orderItem.quantity

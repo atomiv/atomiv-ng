@@ -1,0 +1,23 @@
+input:disabled {
+    color: -internal-light-dark(rgb(175, 15, 15), rgb(206, 53, 53)) !important;
+    cursor: default;
+    background-color: -internal-light-dark(rgba(214, 18, 18, 0.3), rgba(179, 7, 7, 0.3)) !important;
+    border-color: rgba(173, 23, 23, 0.3) !important;
+    border-top-color: rgba(143, 13, 13, 0.3) !important;
+    border-right-color: rgba(201, 58, 58, 0.3) !important;
+    border-bottom-color: rgba(151, 29, 29, 0.3) !important;
+    border-left-color: rgba(221, 33, 33, 0.3) !important;
+}
+
+
+input:read-only {
+    background-color: rgb(255, 245, 246) !important;
+    color: green;
+}
+
+
+.mat-form-field:read-only {
+    background-color: pink;
+}
+
+// attribute, you can use input[readonly] and input:not([readonly]).
