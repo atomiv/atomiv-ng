@@ -8,7 +8,8 @@
     <a mat-button color="primary" class="mb-5" [routerLink]="['/orders']"><mat-icon>arrow_back_ios</mat-icon>Back</a>
   </div>
 
-  <div fxLayout="column">
+  <!-- TODO !showing -->
+  <div fxLayout="column" *ngIf="order">
 
     <mat-card>
 
@@ -100,6 +101,12 @@
     </mat-card>
   
   </div>
+
+  <!-- <div *ngIf="!order">
+    No customer found
+   </div>  
+   <br />
+   <a routerLink="/orders">View All Orders</a> -->
 
 </div>
 

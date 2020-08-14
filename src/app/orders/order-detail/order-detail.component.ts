@@ -42,33 +42,20 @@ export class OrderDetailComponent implements OnInit {
     // const id = +this.route.snapshot.paramMap.get('id');
 
     // jc
-    // this.service.getOrdersByCustomer(id)
-    //   .subscribe((orders: IOrder[]) => {
-    //     this.orders = orders;
-    //     // added below
-    //     console.log(this.orders);
-    //     this.isLoadingResults = false;
-    //   });
-    // jc
-    // this.customerService.getCustomer(id)
-    //   .subscribe((customer: ICustomer) => {
-    //     this.customer = customer;
+    // this.customerService.getCustomers()
+    //   .subscribe((customers: ICustomer[]) => {
+    //     this.customers = customers;
     //   });
 
     // jc
-    this.customerService.getCustomers()
-      .subscribe((customers: ICustomer[]) => {
-        this.customers = customers;
-      });
-
-    // jc
-    this.productService.getProducts()
-      .subscribe((products: IProduct[]) => {
-        this.products = products;
-      });
+    // this.productService.getProducts()
+    //   .subscribe((products: IProduct[]) => {
+    //     this.products = products;
+    //   });
 
     }
 
+    // TODO  issues in console regarding id
   getOrderDetails(id) {
     this.service.getOrder(id)
       .subscribe(data => {
@@ -94,3 +81,18 @@ export class OrderDetailComponent implements OnInit {
   }
 
 }
+
+
+    // jc
+    // this.service.getOrdersByCustomer(id)
+    //   .subscribe((orders: IOrder[]) => {
+    //     this.orders = orders;
+    //     // added below
+    //     console.log(this.orders);
+    //     this.isLoadingResults = false;
+    //   });
+    // jc
+    // this.customerService.getCustomer(id)
+    //   .subscribe((customer: ICustomer) => {
+    //     this.customer = customer;
+    //   });

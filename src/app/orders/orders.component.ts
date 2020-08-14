@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 // jc
-import { zip } from 'rxjs';
+// import { zip } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IOrder } from './shared/order';
 import { ICustomer } from '../customers/shared/customer';
@@ -38,6 +38,7 @@ export class OrdersComponent implements OnInit {
     'action'
   ];
 
+  // TODO change to value, selectedValue
   versions = [
     {'id': '', 'name': 'All results' },
     {'id': '2', 'name': 'Show results cont. "2"' },

@@ -1,0 +1,251 @@
+<div formArrayName="orderItems">
+    <h3>Order Items</h3>
+    <button type="button" (click)="addOrderItem()">Add Order Item</button>
+    <!-- serviceFrm.controls.Staffs.controls -->
+    <!-- {{i}} -->
+    <!-- orderItems().controls -->
+    <!-- let orderItem of orderItems.controls; let i=index -->
+    <div *ngFor="let orderItem of orderForm.get('orderItems').controls; let i=index" formGroupName="i">
+      <!-- the repeated orderItem template -->
+      <!-- {{ orderItems.controls[i].controls.id.value }} -->
+      ORDER LINE: {{i}} <br/>
+      <label>
+        Id:
+      </label>
+      <!-- [formControlName]="i" -->
+      <input type="text" [formControlName]="id" class="form-control">
+        <!-- {{orderItem.id}} -->
+      <label>
+        Qty:
+      </label>
+      <input type="text" [formControlName]="quantity">
+      <button (click)="removeOrderItem(i)">Remove</button>
+
+
+      <!-- <div *ngIf="order">
+        <div *ngFor="let orderItem of order.orderItems">
+          id value: {{ orderForm.controls.orderItems.controls[i].controls.id.value }} -- {{ orderItem.id }}<br/>
+          qty: {{ orderItems.controls[i].controls.quantity.value}} -- {{ orderItem.quantity}}
+        </div>
+      </div> -->
+
+      <!-- <pre>
+      {{orderForm.value | json }}
+      </pre> -->
+
+    </div>
+  </div>
+
+
+
+
+  <!-- ---------------------------------------- -->
+
+  <!-- <div *ngIf="order">
+  <div *ngFor="let orderItem of order.orderItems">
+    {{orderItem.id}}
+  </div>
+</div> -->
+
+
+<!-- TODO: autocomplete -->
+
+  <!-- ----------------------------------------------- -->
+
+
+  <!-- Nested Form Groups -->
+      <!-- <div *ngIf="order">
+        <div *ngFor="let orderItem of order.orderItems">
+
+          <div formGroupName="orderItems2">
+            <mat-form-field>
+              <mat-label>Order Line Id</mat-label>    
+              <input matInput placeholder="Order Id" formControlName="quantity">
+              {{orderItem.id}}, {{orderItem.quantity}}
+            </mat-form-field> 
+          </div>
+
+        </div>
+      </div> -->
+
+      <!-- ------------------------------------------------------- -->
+
+      <!-- INSERT HERE -->
+
+      
+
+      <!-- Chosen name: {{ orderForm.controls.items.controls[i].controls.name.value }} -->
+
+      <!-- ------------------------------------ -->
+      <!-- <div formArrayName="items" *ngFor="let item of orderForm.get('items').controls;
+      let i = index;">
+        <div [formGroupName]="i">
+          <input formControlName="id" placeholder="Item Id">
+          <input formControlName="quantity" placeholder="Item quantity">
+        </div>
+        Chosen name: {{ orderForm.controls.items.controls[i].controls.name.value }}
+      </div> -->
+
+
+      <!-- Testing -->
+      <!-- <section>
+        <p>Any special requests?</p>
+        <ul formArrayName="specialRequests">
+          <li *ngFor="let item of orderForm.controls.specialRequests.controls; let i = index">
+            <input type="text" formControlName="{{i}}">
+            <button type="button" title="Remove Request" (click)="onRemoveSpecialRequest(i)">Remove</button>
+          </li>
+        </ul>
+        <button type="button" (click)="onAddSpecialRequest()">
+          Add a Request
+        </button>
+      </section> -->
+
+
+
+
+      <!-- <div *ngFor="let orderItem of order.orderItems"> -->
+        <!-- order Id -  is this filled in by default -->
+        <!-- productId & productName -->
+        <!-- <div *ngFor="let product of products"> -->
+
+          <!-- <mat-form-field>
+            <label>Product Id</label>
+            <input matInput placeholder="Product Id" formControlName="productId">
+            <mat-error>
+              <span *ngIf="!orderForm.get('productId').valid && orderForm.get('productId').touched">Please enter Product Id</span>
+            </mat-error>
+          </mat-form-field> -->
+
+        <!-- </div> -->
+        <!-- orderItem.quantity -->
+        <!-- product.price prefilled -->
+        <!-- total price prefilled -->
+
+        <!-- <mat-form-field>
+          <label>Notes</label>
+          <input matInput placeholder="Notes" formControlName="notes">
+          <mat-error>
+            <span *ngIf="!orderForm.get('notes').valid && orderForm.get('notes').touched">Please enter Notes</span>
+          </mat-error>
+        </mat-form-field> -->
+
+      <!-- </div> -->
+
+
+      <!-- other -------------------------------------------------------------------- -->
+
+      
+        <!-- required           .. is this necessary -->
+        <!-- <input matInput placeholder="Customer Id" formControlName="customerId"> -->
+
+        <!-- not here for this... after ngModel ... formControlName="customer" -->
+        <!-- [(ngModel)]="selectedCustomer"  -->
+
+
+
+        <!-- <div class="container">
+  <h1>Angular FormArray Example</h1>
+  <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+    <p>
+      <label for="name">Product Name:</label>
+      <input type="text" id="name" name="name" formControlName="name" class="form-control">
+    </p>
+    <table class="table table-bordered" formArrayName="quantities">
+      <tr>
+        <th colspan="2">Add Multiple Quantity:</th>
+        <th width="150px"><button type="button" (click)="addQuantity()" class="btn btn-primary">Add More</button></th>
+      </tr>
+      <tr *ngFor="let quantity of quantities().controls; let i=index" [formGroupName]="i">
+        <td>
+            Quantity :
+            <input type="text" formControlName="qty" class="form-control">
+        </td>
+        <td>
+            Price:
+            <input type="text" formControlName="price" class="form-control">
+        </td>
+        <td>
+            <button (click)="removeQuantity(i)" class="btn btn-danger">Remove</button>
+        </td>
+      </tr>
+    </table>
+    <button type="submit" class="btn btn-success">Submit</button>
+  </form>
+  <br/>
+  {{this.productForm.value | json}}
+</div> -->
+
+
+
+
+
+
+<!-- <form [formGroup]="form">
+  <input type="checkbox" formControlName="published"> Published
+  <div *ngIf="form.controls.published.value">
+
+    <h2>Credentials</h2>
+    <button (click)="addCreds()">Add</button>
+
+    <div formArrayName="credentials" *ngFor="let creds of form.controls.credentials?.value; let i = index">
+      <ng-container [formGroupName]="i">
+        <input placeholder="Username" formControlName="username">
+        <input placeholder="Password" formControlName="password">
+      </ng-container>
+    </div>
+
+  </div>
+</form> -->
+
+
+<!-- cities form ---------------- -->
+
+
+<!-- CitiesFORM:
+<form [formGroup]="citiesForm" (ngSubmit)="onSubmit()">
+  <p>
+    <label for="name">Name </label>
+    <input type="text" id="name" name="name" formControlName="name">
+  </p>
+  Cities
+  <div formArrayName="cities">
+    <div *ngFor="let city of cities().controls; let i=index">
+      <div [formGroupName]="i">
+        {{i}}
+        city name :
+        <input type="text" formControlName="city">
+        exp:
+        <input type="text" formControlName="exp">
+ 
+        <button (click)="removeCity(i)">Remove</button>
+      </div>
+    </div>
+  </div>
+  <p>
+    <button type="submit">Submit</button>
+  </p>
+</form>
+
+<p>
+  <button type="button" (click)="addCities()">Add</button>
+</p> -->
+
+<!-- {{this.citiesForm.value | json}} -->
+
+
+<!-- --------------- -->
+
+
+<!-- <section>
+  <p>Any special requests?</p>
+  <ul formArrayName="specialRequests">
+    <li *ngFor="let item of orderForm2.controls.specialRequests.controls; let i = index">
+      <input type="text" formControlName="{{i}}">
+      <button type="button" title="Remove Request" (click)="onRemoveSpecialRequest(i)">Remove</button>
+    </li>
+  </ul>
+  <button type="button" (click)="onAddSpecialRequest()">
+    Add a Request
+  </button>
+</section> -->

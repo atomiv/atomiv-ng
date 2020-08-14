@@ -1,3 +1,51 @@
+<!-- <form [formGroup]="auxConfigform">
+  <div *ngFor="let c of auxArray;let i =index" formArrayName="aux" >
+     <div [formGroupName]="i">
+      <label  class="w60">AUX {{i}}</label>
+      <input  type="text" class="txt-fld-200" formControlName="description">
+      <input type="radio"  name="tempSensor"  formControlName="tempSensor">
+      <label for="test2" class="w140">Switch</label>
+      <input type="radio" [attr.id]="'test1'+i" name="tempSensor" formControlName="tempSensor">
+      <label for="test1" class="pr-40" >Temp Sensor</label>
+      <input type="checkbox" [attr.id]="'check'+i" name="radio-group1" formControlName="spaceAvg">
+      <label for="check">Space Sensor </label>
+      <hr>
+     </div> 
+  </div>
+  </form>
+  
+  formValue: {{auxConfigform.value | json}} -->
+
+<!-- --------------------------- -->
+
+<!-- <form [formGroup]="form">
+
+	<h2>Click the add button below</h2>
+	<button (click)="addCreds()">Add</button>
+        <div formArrayName="credentials" *ngFor="let creds of form.controls.credentials?.value; 
+        let i = index;trackBy:trackFn">
+          <div [formGroupName]="i" style="display: flex">
+            <select (ngModelChange)="changeAction($event,i)" formControlName="action">
+              <option *ngFor="let option of options;" value="{{option.key}}"> {{option.value}}</option>
+            </select>
+            <input placeholder="Name" formControlName="name">
+            <div >
+            <input placeholder="Label" formControlName="label">
+            </div>
+          </div>
+        </div>
+
+    </form>
+
+    <pre>
+      {{ form ?.getRawValue() | json }}
+    </pre> -->
+
+
+
+<!-- -------------------------- -->
+
+
 <div class="container mt-5">
   <div *ngIf="isLoadingResults">
     <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
@@ -8,24 +56,40 @@
   </div>
   <mat-card>
     <form [formGroup]="orderForm" (ngSubmit)="onFormSubmit(orderForm.value)">
+      
       <mat-form-field>
-        <input matInput placeholder="Id" formControlName="id">
+        <mat-label>Order Id</mat-label>
+        <!-- [readonly]="!editable" -->
+        <!-- ?? readonly -->
+        <input matInput placeholder="Order Id" formControlName="id">
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Customer</mat-label>
+        <mat-select formControlName="customerId" placeholder="Select Customer">
+          <mat-option *ngFor="let customer of customers" [value]="customer.id">
+            {{ customer.id }} - {{ customer.firstName }} {{ customer.lastName }}
+          </mat-option>
+        </mat-select>
         <mat-error>
-          <span *ngIf="!orderForm.get('id').valid && orderForm.get('id').touched">Please enter Id</span>
+          <span *ngIf="!orderForm.get('customerId').valid && orderForm.get('customerId').touched">Please enter Customer Id</span>
         </mat-error>
       </mat-form-field>
-      <mat-form-field>
-        <input matInput placeholder="First Name" formControlName="firstName">
-        <mat-error>
-          <span *ngIf="!orderForm.get('firstName').valid && orderForm.get('firstName').touched">Please enter First Name</span>
-        </mat-error>
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput placeholder="Notes" formControlName="notes">
-        <mat-error>
-          <span *ngIf="!orderForm.get('notes').valid && orderForm.get('notes').touched">Please enter Notes</span>
-        </mat-error>
-      </mat-form-field>
+
+
+      <!-- <button type="button" click="addOrderItem()">Add</button> -->
+      <h2>Order Items</h2>
+        <button type="button" (click)="addOrderItems()">Add</button>
+
+        <div formArrayName="orderItems" *ngFor="let hobb of orderForm.controls.orderItems?.value; let i = index">
+          <ng-container [formGroupName]="i">
+            <input placeholder="id" formControlName="id">
+            <input placeholder="quantity" formControlName="quantity">
+          </ng-container>
+        </div>
+
+      
+
       <div>
         <!-- save -->
         <button type="submit" [disabled]="!orderForm.valid" mat-flat-button color="primary" class="mr-3">Save</button>
@@ -34,6 +98,8 @@
         <!-- <mat-icon>save</mat-icon> -->
         <!-- <a mat-flat-button color="primary" (click)="orderDetails()"><mat-icon>info</mat-icon></a> -->
       </div>
+
     </form>
+    formValue: {{orderForm.value | json}}
   </mat-card>
 </div>

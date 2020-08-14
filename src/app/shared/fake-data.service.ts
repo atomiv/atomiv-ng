@@ -51,8 +51,8 @@ export class FakeDataService implements InMemoryDbService {
         customerId: 1,
         orderItems: [
           // productName, price
-          { id: 1, productId: 5, quantity: 2 },
-          { id: 2, productId: 3, quantity: 1 },
+          { id: 1, productId: 5, quantity: 400 },
+          { id: 2, productId: 3, quantity: 300 },
         ]
       },
       {
