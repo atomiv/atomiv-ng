@@ -7,8 +7,13 @@ import { FormControl, FormGroupDirective, FormBuilder, FormGroup, FormArray, NgF
 
 import { OrderService } from '../shared/order.service';
 import { CustomerService } from '../../customers/shared/customer.service';
+import { ProductService } from '../../products/shared/product.service';
 import { IOrder } from '../shared/order';
 import { ICustomer } from '../../customers/shared/customer';
+import { IProduct } from '../../products/shared/product';
+
+import { MatTableDataSource } from '@angular/material/table';
+
 
 @Component({
   selector: 'app-order-edit',
@@ -26,6 +31,10 @@ export class OrderEditComponent implements OnInit {
   customers: ICustomer[] = [];
   customer: ICustomer;
 
+  // product form field dropdown
+  products: IProduct[] = [];
+  product: IProduct;
+
   orderForm: FormGroup;
   // hobb: FormArray;
 
@@ -38,18 +47,49 @@ export class OrderEditComponent implements OnInit {
 
   isLoadingResults = false;
 
+  // --------------------
+  isTableHasData = true;
+
+  // displayedColumns: string[] = [];
+
+  // quantity commented out, still working
+  displayedColumns: string[] = [
+    // 'InnerTable',
+    'id',
+    // 'customerId',
+    'productId',
+    'quantity',
+    // 'firstName',
+    // 'totalPrice',
+    // 'action'
+  ];
+
+  dataSource = new MatTableDataSource<IOrder>();
+
+  // -------------------
+
   // private fb:FormBuilder
   constructor(private router: Router,
     private route: ActivatedRoute,
     private service: OrderService,
     private customerService: CustomerService,
+    private productService: ProductService,
     private formBuilder: FormBuilder,
     ) { }
 
   ngOnInit() {
 
-    // jc
-    this.getOrderDetails(this.route.snapshot.params['id']);
+    // jc !!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    // this.getOrderDetails(this.route.snapshot.params['id']);
+    // for MatTAble
+    const id = +this.route.snapshot.paramMap.get('id');
+    this.service.getOrders()
+    .subscribe( data => {
+      const filteredData = data.filter(d => d.id === id);
+      this.dataSource = new MatTableDataSource(filteredData);
+    });
+
+
 
     this.getOrder(this.route.snapshot.params['id']);
 
@@ -57,6 +97,8 @@ export class OrderEditComponent implements OnInit {
     this.orderForm = this.formBuilder.group({
       'id' : [null, Validators.required],
       'customerId' : [null, null],
+      // name: ['', Validators.required],
+      // Email: ['', [Validators.required, Validators.email]],
       orderItems: this.formBuilder.array([
         // this.addOrderItem()
       ]),
@@ -76,6 +118,11 @@ export class OrderEditComponent implements OnInit {
     this.customerService.getCustomers()
       .subscribe((customers: ICustomer[]) => {
         this.customers = customers;
+      });
+
+    this.productService.getProducts()
+      .subscribe((products: IProduct[]) => {
+        this.products = products;
       });
 
     // readonly !!!
@@ -109,8 +156,10 @@ export class OrderEditComponent implements OnInit {
     // const hobb = this.orderForm.controls.orderItems as FormArray;
     // added 'this.push' instead of 'push' when removed const above
     this.hobb.push(this.formBuilder.group({
-      id: '',
-      quantity: '',
+      // id: ''
+      id: [null, null],
+      productId: [null, null],
+      quantity: [null, null],
     }));
   }
 
@@ -187,6 +236,7 @@ export class OrderEditComponent implements OnInit {
         this.hobb.push(this.formBuilder.group({
           // orderItem
           id: orderItem.id,
+          productId: orderItem.productId,
           quantity: orderItem.quantity
         }));
       });

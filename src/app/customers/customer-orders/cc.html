@@ -1,4 +1,4 @@
-  <!-- <div *ngIf="customer">
+  <div *ngIf="customer">
     <h1>Orders for {{ customer.firstName }} {{ customer.lastName }}</h1>
   
     <table class="table table-hover orders-table" 
@@ -13,7 +13,7 @@
    No customer found
   </div>  
   <br />
-  <a routerLink="/customers">View All Customers</a> -->
+  <a routerLink="/customers">View All Customers</a>
   
   
   <div class="container mt-5">
@@ -28,34 +28,34 @@
     </div>
 
     <!-- --------------------------- -->
-    <div *ngIf="customer" class="mb-5">
+    <div *ngIf="customer">
       <h1>Orders for {{ customer.firstName }} {{ customer.lastName }}</h1>
       
-      <!-- <div *ngFor="let order of orders"> -->
-        <!-- <h3>Order No: {{order.id}}</h3> -->
+      <div *ngFor="let order of orders">
+
+        <h3>Order No: {{order.id}}</h3>
         <!-- <h1>Order Date: </h1>
         <h1>Order Total: </h1>
         <h1>click to get order details</h1> -->
-          <!-- <div *ngFor="let orderItem of order.orderItems">
-          </div> -->
-      <!-- </div> -->
+
+          <div *ngFor="let orderItem of order.orderItems">
+          </div>
+      </div>
     </div>
     <!-- --------------------------- -->
   
     <div fxLayout="column" *ngIf="customer">
   
       <div *ngFor="let order of orders">
-        <!-- mat-card *ngFor="let orderItem of order.orderItems" -->
-        <mat-card class="mb-5">
+        <mat-card *ngFor="let orderItem of order.orderItems">
   
           <mat-card-header>
             <mat-card-title>
-              Order No: {{ order.id }}
-              <!-- Order No: {{ orderItem.id }} -->
+              Order No: {{ orderItem.id }}
             </mat-card-title>
           </mat-card-header>
     
-          <!-- <mat-card-content>
+          <mat-card-content>
             <mat-list>
               <mat-list-item>
                 <div mat-line>First Name:</div>
@@ -89,6 +89,7 @@
                   </div>
                 </div>
               </mat-list-item>
+              <!-- orderTotal -->
               <mat-list-item>
                 <div mat-line>Order Total:</div>
                 <div mat-line *ngFor="let product of products">
@@ -98,17 +99,17 @@
                 </div>
               </mat-list-item>
             </mat-list>
-          </mat-card-content> -->
-          <!-- Total Total Order -->
+            <!-- TODO -->
+            <!-- Total Total Order -->
+          </mat-card-content>
     
           <mat-card-actions>
-            <button mat-flat-button color="primary" class="mr-3" [routerLink]="['/orders/', order.id ]">
-              View
-            </button>
-            <!-- <button mat-flat-button color="primary" class="mr-3" [routerLink]="['/orders/edit', order.id]">
+            <button mat-flat-button color="primary" class="mr-3" [routerLink]="['/orders/edit', order.id]">
+              <!-- <mat-icon>edit</mat-icon> -->
               Edit
-            </button> -->
+            </button>
             <button mat-stroked-button color="primary" (click)="deleteOrder(order.id)">
+              <!-- <mat-icon>delete</mat-icon> -->
               Delete
             </button>
           </mat-card-actions>

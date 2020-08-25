@@ -1,3 +1,19 @@
+WORKS
+
+<h2>Order Items</h2>
+        <button type="button" (click)="addOrderItem()">Add</button>
+
+        <div formArrayName="orderItems" *ngFor="let hobb of orderForm.controls.orderItems?.value; let i = index">
+          <div [formGroupName]="i">
+            <input placeholder="id" formControlName="id">
+            <input placeholder="quantity" formControlName="quantity">
+            <button type="button" (click)="removeOrderItem(i)">Remove</button>
+          </div>
+        </div>
+
+<!-- ----------------------------------------------------------- -->
+
+
 <!-- <form [formGroup]="auxConfigform">
   <div *ngFor="let c of auxArray;let i =index" formArrayName="aux" >
      <div [formGroupName]="i">

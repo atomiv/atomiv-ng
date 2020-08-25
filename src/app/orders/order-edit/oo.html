@@ -1,0 +1,81 @@
+<div class="container mt-5">
+  <div *ngIf="isLoadingResults">
+    <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+  </div>
+  <div>
+    <!-- back -->
+    <a mat-button color="primary" class="mb-5" [routerLink]="['/orders']"><mat-icon>arrow_back_ios</mat-icon>Back</a>
+  </div>
+  <mat-card>
+
+    <!-- from the web -->
+    <!-- <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    </mat-form-field> -->
+
+    <form [formGroup]="orderForm" (ngSubmit)="onFormSubmit(orderForm.value)">
+      
+      <mat-form-field>
+        <mat-label>Order Id</mat-label>
+        <!-- [readonly]="!editable" -->
+        <input matInput placeholder="Order Id" formControlName="id" readonly>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Customer</mat-label>
+        <mat-select formControlName="customerId" placeholder="Select Customer">
+          <mat-option *ngFor="let customer of customers" [value]="customer.id">
+            {{ customer.id }} - {{ customer.firstName }} {{ customer.lastName }}
+          </mat-option>
+        </mat-select>
+        <mat-error>
+          <span *ngIf="!orderForm.get('customerId').valid && orderForm.get('customerId').touched">Please enter Customer Id</span>
+        </mat-error>
+      </mat-form-field>
+
+
+      <!-- this should be a table -->
+      <h2>Order Items</h2>
+        <button type="button" (click)="addOrderItem()">Add</button>
+
+        <div formArrayName="orderItems" *ngFor="let hobb of orderForm.controls.orderItems?.value; let i = index">
+          <div [formGroupName]="i">
+
+            <!-- orderItem.id -->
+            <!-- <mat-input-container> -->
+              <!-- <mat-label>Order Item Id</mat-label> -->
+              <input placeholder="id" formControlName="id">
+            <!-- </mat-input-container> -->
+
+            <!-- orderItem.productId -->
+            <!-- PRODUCT ID - PRODUCT NAME -->
+            <input placeholder="productId" formControlName="productId">
+            <!-- {{orderItem.id}} - hello -->
+            hello
+
+            <!-- orderItem.quantity -->
+            <input placeholder="quantity" formControlName="quantity">
+
+            <!-- product.price -->
+            <button type="button" (click)="removeOrderItem(i)">Remove</button>
+
+          </div>
+        </div>
+
+      
+
+      <div>
+        <!-- save -->
+        <button type="submit" [disabled]="!orderForm.valid" mat-flat-button color="primary" class="mr-3">Save</button>
+        <!-- cancel -->
+        <button mat-stroked-button color="primary" (click)="orderDetails()">Cancel</button>
+        <!-- <mat-icon>save</mat-icon> -->
+        <!-- <a mat-flat-button color="primary" (click)="orderDetails()"><mat-icon>info</mat-icon></a> -->
+      </div>
+
+    </form>
+    <!-- formValue: {{orderForm.value | json}} -->
+    {{orderForm.value.customerId}}
+    {{orderForm.value.orderItems.quantity}}
+  </mat-card>
+</div>

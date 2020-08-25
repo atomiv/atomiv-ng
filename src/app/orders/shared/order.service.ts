@@ -35,8 +35,8 @@ export class OrderService {
 
 // For fake backend return status 200 https://medium.com/angular-in-depth/top-10-ways-to-use-interceptors-in-angular-db450f8a62d6
 
-  // TODO: In production, we would not have catchError but instead global error handling 
-  // https://rollbar.com/blog/error-handling-with-angular-8-tips-and-best-practices/ .. HttpErrorInterceptor 
+  // TODO: In production, we would not have catchError but instead global error handling
+  // https://rollbar.com/blog/error-handling-with-angular-8-tips-and-best-practices/ .. HttpErrorInterceptor
   // (4XX validation error, 5XX unexpected error) - after you connect to real api
   // TODO: Check whether it's possible to do global logging, e.g. logging that REST API call will be executed andhas been finished
 

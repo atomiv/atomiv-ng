@@ -46,6 +46,14 @@ table.mat-table {
   }
 }
 
+// --------------------------------------
+// navbar - when toggled
+mat-sidenav {
+  .mat-list-item {
+    padding-left: .75rem !important;
+  }
+}
+
 // -----------------------------------------
 
 // // works
@@ -113,4 +121,14 @@ td a {
 
 a {
   text-decoration: none !important;
+}
+
+// --------------------
+// edit order
+.action-button {
+  color: rgba(0, 0, 0, 0.54);
+  color: mat-color($atomiv-primary) !important;
+  border: none;
+  background-color: white;
+  padding: 0;
 }

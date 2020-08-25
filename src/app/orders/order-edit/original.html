@@ -1,0 +1,170 @@
+<div class="container mt-5">
+    <div *ngIf="isLoadingResults">
+      <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+    </div>
+    <div>
+      <!-- back -->
+      <a mat-button color="primary" class="mb-5" [routerLink]="['/orders']"><mat-icon>arrow_back_ios</mat-icon>Back</a>
+    </div>
+    <mat-card>
+  
+      <!-- from the web -->
+      <!-- <mat-form-field>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+      </mat-form-field> -->
+  
+      <form [formGroup]="orderForm" (ngSubmit)="onFormSubmit(orderForm.value)">
+        
+        <mat-form-field class="mr-4">
+          <mat-label>Order Id</mat-label>
+          <!-- [readonly]="!editable" -->
+          <input matInput placeholder="Order Id" formControlName="id" readonly>
+        </mat-form-field>
+  
+        <mat-form-field appearance="fill">
+          <mat-label>Customer</mat-label>
+          <mat-select formControlName="customerId" placeholder="Select Customer">
+            <mat-option *ngFor="let customer of customers" [value]="customer.id">
+              {{ customer.id }} - {{ customer.firstName }} {{ customer.lastName }}
+            </mat-option>
+          </mat-select>
+          <mat-error>
+            <span *ngIf="!orderForm.get('customerId').valid && orderForm.get('customerId').touched">Please enter Customer Id</span>
+          </mat-error>
+        </mat-form-field>
+  
+  
+        <h2>Order Items</h2>
+          <button mat-flat-button color="accent" type="button" (click)="addOrderItem()" class="mb-4">
+            <mat-icon>add</mat-icon>
+          </button>
+  
+          <table class="table">
+            <tr>
+              <th>Order Line</th>
+              <th>Product Name</th>
+              <th>Quantity</th>
+              <th>Action</th>
+            </tr>
+  
+  
+            <!-- hobb. data -->
+          <ng-container formArrayName="orderItems" *ngFor="let hobb of orderForm.controls.orderItems?.value; let i = index">
+            <ng-container [formGroupName]="i">
+  
+  <!-- TODO automatically add id for new order line -->
+                <tr>
+                  <td>
+                      <!-- matInput -->
+                      <input placeholder="id" formControlName="id" readonly>
+                  </td>
+  
+                    <td>
+                      <mat-form-field>
+                        <input matInput placeholder="Select product" formControlName="productId">
+                        <!-- <mat-select formControlName="productId" placeholder="Select Product">
+                          <mat-option *ngFor="let product of products" [value]="product.id">
+                            {{ product.id }}
+                          </mat-option>
+                        </mat-select> -->
+                      </mat-form-field>
+                    </td>
+  
+                  <td>
+                    <input placeholder="quantity" formControlName="quantity">
+                  </td>
+                  <td>
+                    <!-- type="button" mat-stroked-button color="primary" -->
+                    <!-- TODO does't work with mat-stroked-button -->
+                    <button type="button" class="action-button" (click)="removeOrderItem(i)">Remove</button>
+                  </td>
+                </tr>
+  
+              </ng-container>
+          </ng-container>
+  
+          </table>
+  
+        
+  
+        <div>
+          <!-- save -->
+          <button type="submit" [disabled]="!orderForm.valid" mat-flat-button color="primary" class="mr-3">Save</button>
+          <!-- cancel -->
+          <button mat-stroked-button color="primary" (click)="orderDetails()">Cancel</button>
+          <!-- <mat-icon>save</mat-icon> -->
+          <!-- <a mat-flat-button color="primary" (click)="orderDetails()"><mat-icon>info</mat-icon></a> -->
+        </div>
+  
+      </form>
+      <!-- formValue: {{orderForm.value | json}} -->
+      <!-- {{orderForm.value.customerId}} -->
+    </mat-card>
+  </div>
+  
+
+
+  <!-- ================================== -->
+
+  <div formArrayName="orderItems" *ngFor="let hobb of orderForm.controls.orderItems?.value; let i = index">
+    <div [formGroupName]="i">
+
+<!-- *ngFor="let hobb of orderForm.controls.or -->
+<mat-table [dataSource]="dataSource">
+
+
+      <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef>Id</mat-header-cell>
+        <!-- *matCellDef="let row; let i = index"  [formGroupName]="i" -->
+        <mat-cell *matCellDef="let row">
+          <!-- {{row.id}} -->
+          <!-- {{hobb.id}} ___ -->
+          <mat-form-field>
+            <input matInput placeholder="id" formControlName="id" readonly>
+          </mat-form-field>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="productId">
+        <mat-header-cell *matHeaderCellDef>productId</mat-header-cell>
+        <!-- [formGroup]="row" -->
+        <mat-cell *matCellDef="let row">
+          <mat-form-field floatLabel="never">
+            <input matInput formControlName="productId">
+            <!-- <mat-select formControlName="productId">
+              <mat-option value="O">O</mat-option>
+              <mat-option value="A">A</mat-option>
+              <mat-option *ngFor="let product of products" [value]="product.id">
+                {{ product.id }}
+              </mat-option>
+            </mat-select> -->
+          </mat-form-field>
+        </mat-cell>
+      </ng-container>
+
+            <!-- <input matInput placeholder="id" formControlName="id" readonly> -->
+
+            <!-- <mat-form-field> -->
+              <!-- <input matInput placeholder="Select product" formControlName="productId"> -->
+              <!-- <mat-select formControlName="productId" placeholder="Select Product">
+                <mat-option *ngFor="let product of products" [value]="product.id">
+                  {{ product.id }}
+                </mat-option>
+              </mat-select> -->
+            <!-- </mat-form-field> -->
+
+          <!-- <input placeholder="quantity" formControlName="quantity"> -->
+
+          <!-- type="button" mat-stroked-button color="primary" -->
+          <!-- TODO does't work with mat-stroked-button -->
+          <!-- <button type="button" class="action-button" (click)="removeOrderItem(i)">Remove</button> -->
+
+
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+</mat-table>
+
+</div>
+</div>

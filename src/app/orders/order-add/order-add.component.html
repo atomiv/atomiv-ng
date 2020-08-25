@@ -8,7 +8,89 @@
   </div>
   <mat-card>
     <form [formGroup]="orderForm" (ngSubmit)="onFormSubmit(orderForm.value)">
-      <mat-form-field>
+      
+      <!-- --------------------------------------- -->
+
+      <!-- <mat-form-field class="mr-4">
+        <mat-label>Order Id</mat-label>
+        <input matInput placeholder="Order Id" formControlName="id" readonly>
+      </mat-form-field> -->
+
+      <!-- mmm -->
+      <mat-form-field appearance="">
+        <mat-label>Customer</mat-label>
+        <mat-select formControlName="customerId" placeholder="Select Customer">
+          <mat-option *ngFor="let customer of customers" [value]="customer.id">
+            {{ customer.id }} - {{ customer.firstName }} {{ customer.lastName }}
+          </mat-option>
+        </mat-select>
+        <mat-error>
+          <span *ngIf="!orderForm.get('customerId').valid && orderForm.get('customerId').touched">Please enter Customer Id</span>
+        </mat-error>
+      </mat-form-field>
+
+
+      <!-- mmm -->
+      <h2>Order Items</h2>
+        <button mat-flat-button color="accent" type="button" (click)="addOrderItem()" class="mb-4">
+          <mat-icon>add</mat-icon>
+        </button>
+
+
+        <table class="table">
+          <tr>
+            <!-- <th>Order Line</th> -->
+            <th>Product Id</th>
+            <th>Quantity</th>
+            <th>Action</th>
+          </tr>
+
+
+          <!-- hobb. data -->
+        <ng-container formArrayName="orderItems" *ngFor="let hobb of orderForm.controls.orderItems?.value; let i = index">
+          <ng-container [formGroupName]="i">
+
+<!-- TODO automatically add id for new order line -->
+              <tr>
+                <!-- <td>
+                    <input placeholder="id" formControlName="id" readonly>
+                </td> -->
+
+                  <td>
+                    <!-- <mat-form-field> -->
+                      <input placeholder="productId" formControlName="productId">
+                      <!-- <mat-select formControlName="productId">
+                        <mat-option *ngFor="let product of products" [value]="product.id">
+                          {{ product.id }}
+                        </mat-option>
+                      </mat-select> -->
+                      <!-- <mat-select formControlName="bloodGroup">
+                        <mat-option value="O">O</mat-option>
+                        <mat-option value="A">A</mat-option>
+                        <mat-option value="B">B</mat-option>
+                        <mat-option value="AB">AB</mat-option>
+                      </mat-select> -->
+                    <!-- </mat-form-field> -->
+                  </td>
+
+                <td>
+                  <input placeholder="quantity" formControlName="quantity">
+                </td>
+                <td>
+                  <!-- type="button" mat-stroked-button color="primary" -->
+                  <!-- TODO does't work with mat-stroked-button -->
+                  <button type="button" class="action-button" (click)="removeOrderItem(i)">Remove</button>
+                </td>
+              </tr>
+
+            </ng-container>
+        </ng-container>
+
+        </table>
+
+        <!-- ---------------------------------------------------- -->
+
+      <!-- <mat-form-field>
         <input matInput placeholder="First Name" formControlName="firstName">
         <mat-error>
           <span *ngIf="!orderForm.get('firstName').valid && orderForm.get('firstName').touched">Please enter First Name</span>
@@ -19,12 +101,9 @@
         <mat-error>
           <span *ngIf="!orderForm.get('notes').valid && orderForm.get('notes').touched">Please enter Notes</span>
         </mat-error>
-      </mat-form-field>
+      </mat-form-field> -->
       
       <div class="button-row">
-        <!-- TODO -->
-        <!-- <button (click)="save()">save</button> -->
-        <!-- <button (click)="goBack()">go back</button> -->
         <button type="submit" [disabled]="!orderForm.valid" mat-flat-button color="primary" class="mr-3">Save</button>
         <button mat-stroked-button color="primary" [routerLink]="['/orders']">Cancel</button>
       </div>
@@ -32,3 +111,7 @@
   </mat-card>
 </div>
 
+
+        <!-- TODO -->
+        <!-- <button (click)="save()">save</button> -->
+        <!-- <button (click)="goBack()">go back</button> -->

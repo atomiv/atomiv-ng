@@ -1,0 +1,196 @@
+<table class="table table-hover">
+    <tr>
+      <th>Order Line</th>
+      <th>Product Name</th>
+      <th>Unit Price</th>
+      <th>Quantity</th>
+      <th>Subtotal</th>
+    </tr>
+    <tr *ngFor="let orderItem of order.orderItems">
+        <td>{{ orderItem.id }}</td>
+        <!-- <td>{{ orderItem.productId }}</td> -->
+
+        <ng-container *ngFor="let product of products">
+          <td *ngIf="product.id === orderItem.productId">
+            {{ product.productName }}
+          </td>
+        </ng-container>
+
+        <ng-container *ngFor="let product of products">
+          <td *ngIf="product.id === orderItem.productId">
+            {{ product.price}} €
+          </td>
+        </ng-container>
+        
+        <td>{{ orderItem.quantity }}</td>   
+        
+        <ng-container *ngFor="let product of products">
+          <td *ngIf="product.id === orderItem.productId">
+            {{ product.price * orderItem.quantity }} €
+          </td>
+        </ng-container>
+
+        <!-- <div>Order Total : {{total}}</div> -->
+        <!-- this call the get method Total -->
+        
+    </tr>
+  </table>
+
+
+  <!-- ----------------------------- -->
+
+  <!-- <div *ngFor="let orderItem of order.orderItems">
+            <mat-list-item>
+              <div mat-line>Id</div>
+              <span mat-line>{{ orderItem.id }}</span>
+            </mat-list-item>
+            <mat-list-item>
+              <div mat-line>Product Id</div>
+              <span mat-line>{{ orderItem.productId }}</span>
+            </mat-list-item>
+            <mat-list-item>
+              <div mat-line>Product Name</div>
+              <div mat-line *ngFor="let product of products">
+                <div *ngIf="product.id === orderItem.productId">
+                  {{ product.productName}}
+                </div>
+              </div>
+            </mat-list-item>
+            <mat-list-item>
+              <div mat-line>Quantity:</div>
+              <span mat-line>{{ orderItem.quantity }}</span>
+            </mat-list-item>
+            <mat-list-item>
+              <div mat-line>Product Price:</div>
+              <div mat-line *ngFor="let product of products">
+                <div *ngIf="product.id === orderItem.productId">
+                  {{ product.price}} EUR
+                </div>
+              </div>
+            </mat-list-item>
+            <mat-list-item>
+              <div mat-line>Order Total:</div>
+              <div mat-line *ngFor="let product of products">
+                <div *ngIf="product.id === orderItem.productId">
+                  {{ product.price * orderItem.quantity }} EUR
+                </div>
+              </div>
+            </mat-list-item> -->
+
+            <!-- TO DO -->
+            <!-- TOTAL TOTAL ORDER -->
+          <!-- </div> -->
+
+<!-- ------------------------------------- -->
+
+<ng-container *ngFor="let orderItem of order.orderItems">
+    <table mat-table [dataSource]="dataSource">
+      <!-- <ng-container *ngFor="let orderItem of order.orderItems"> -->
+      <!-- <td>{{ orderItem.id }}</td> -->
+
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>Order No</th>
+        <!--  *ngFor="let orderItem of order.orderItems" -->
+        <td mat-cell *matCellDef="let row">{{ orderItem.id }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="productId">
+        <th mat-header-cell *matHeaderCellDef>Product Id</th>
+        <td mat-cell *matCellDef="let row">{{ orderItem.productId }}</td>
+      </ng-container>
+
+    <!-- </ng-container> -->
+
+      <!-- <ng-container matColumnDef="InnerTable">
+        <th mat-header-cell *matHeaderCellDef>Product Id</th>
+        <td mat-cell *matCellDef="let row">
+          <table>
+            <tr *ngFor="let orderItem of row.orderItems">
+              <td>{{ orderItem.productId }}</td>
+            </tr>
+          </table>
+        </td>
+      </ng-container> -->
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns; "></tr>
+  </table>
+</ng-container>
+
+
+<!-- ------------------------- -->
+
+<ng-container matColumnDef="{{column}}" *ngFor="let column of displayedColumns">
+    <!-- <ng-container *ngFor="let orderItem of order.orderItems"> -->
+      <th mat-header-cell *matHeaderCellDef >{{column}}</th>
+      <!-- <tr *ngFor="let orderItem of order.orderItems"> -->
+        <!-- ONLY SHOWS 1 answer -->
+        <!-- <ng-container *ngFor="let orderItem of order.orderItems"> -->
+        <td mat-cell *matCellDef="let row">
+          <ng-container *ngFor="let orderItem of row.orderItems">
+            <div class="sub-cell">
+              {{orderItem[column]}}
+            </div>
+          </ng-container>
+        </td>
+      <!-- </ng-container> -->
+      <!-- </tr> -->
+    <!-- </ng-container> -->
+  </ng-container>
+
+  <!-- ------------------------------------ -->
+
+  <!-- works -->
+              <!-- <ng-container matColumnDef="{{column}}" *ngFor="let column of displayedColumns">
+                <th mat-header-cell *matHeaderCellDef >{{column}}</th>
+                <td mat-cell *matCellDef="let row">
+                  <ng-container *ngFor="let orderItem of row.orderItems">
+                    <br/>{{orderItem[column]}}... hello
+                  </ng-container>
+                </td>
+              </ng-container> -->
+
+
+              <!-- works -->
+              <!-- <ng-container matColumnDef="{{column}}" *ngFor="let column of displayedColumns">
+                <th mat-header-cell *matHeaderCellDef >{{column}}</th>
+                <td mat-cell *matCellDef="let row">
+                  {{ orderItem[column] }}___
+                  <ng-container *ngFor="let orderItem of row.orderItems">
+                    <br/>{{orderItem[column]}}
+                  </ng-container>
+                </td>
+              </ng-container> -->
+
+              <!-- order id - works -->
+              <!-- <ng-container matColumnDef="{{column}}" *ngFor="let column of displayedColumns">
+                <th mat-header-cell *matHeaderCellDef>{{column}}</th>
+                <td mat-cell *matCellDef="let row">
+                  {{row[column]}}
+                </td>
+              </ng-container> -->
+
+
+              <!-- <ng-container matColumnDef="productId">
+                <th mat-header-cell *matHeaderCellDef>Product Id</th>
+                <td mat-cell *matCellDef="let row">{{ orderItem.productId }}</td>
+              </ng-container> -->
+
+              <!-- <ng-container matColumnDef="quantity">
+                <th mat-header-cell *matHeaderCellDef>Quantity</th>
+                <td mat-cell *matCellDef="let row">{{ orderItem.quantity }}</td>
+              </ng-container> -->
+
+            <!-- </tr> -->
+
+            <!-- <ng-container matColumnDef="InnerTable">
+              <th mat-header-cell *matHeaderCellDef>Product Id</th>
+              <td mat-cell *matCellDef="let row">
+                <table>
+                  <tr *ngFor="let orderItem of row.orderItems">
+                    <td>{{ orderItem.productId }}</td>
+                  </tr>
+                </table>
+              </td>
+            </ng-container> -->
+            

@@ -3,12 +3,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 // jc
 import { IOrder } from '../shared/order';
-import { IOrderItem } from '../shared/order';
 import { ICustomer } from '../../customers/shared/customer';
 import { IProduct } from '../../products/shared/product';
 import { OrderService } from '../shared/order.service';
 import { CustomerService } from '../../customers/shared/customer.service';
 import { ProductService } from '../../products/shared/product.service';
+
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-order-detail',
@@ -26,6 +27,32 @@ export class OrderDetailComponent implements OnInit {
 
   isLoadingResults = true;
 
+  // --------------
+  // selectedRowIndex = -1;
+
+  // pageSize = 5;
+  // pageSizeOptions = [5, 10, 25, 100];
+
+  isTableHasData = true;
+
+  // displayedColumns: string[] = [];
+
+  displayedColumns: string[] = [
+    // 'InnerTable',
+    'id',
+    'productId',
+    'quantity',
+
+    // 'firstName',
+    // 'totalPrice',
+    // 'action'
+  ];
+
+  // isLoadingResults = true;
+
+  dataSource = new MatTableDataSource<IOrder>();
+  // --------------
+
   constructor(
     private service: OrderService,
     // jc
@@ -36,24 +63,72 @@ export class OrderDetailComponent implements OnInit {
 
   ngOnInit() {
 
+    // jc
+    const id = +this.route.snapshot.paramMap.get('id');
+
+    // this.loadData();
+
+    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     this.getOrderDetails(this.route.snapshot.params['id']);
 
     // jc
-    // const id = +this.route.snapshot.paramMap.get('id');
+    this.customerService.getCustomers()
+    .subscribe((customers: ICustomer[]) => {
+      this.customers = customers;
+    });
 
     // jc
-    // this.customerService.getCustomers()
-    //   .subscribe((customers: ICustomer[]) => {
-    //     this.customers = customers;
-    //   });
+    this.productService.getProducts()
+    .subscribe((products: IProduct[]) => {
+      this.products = products;
+    });
 
-    // jc
-    // this.productService.getProducts()
-    //   .subscribe((products: IProduct[]) => {
-    //     this.products = products;
-    //   });
+    // ------------
+    // this.service.getOrders()
+    // .subscribe((res: IOrder[]) => {
+    //   this.dataSource.data = res;
+    //   console.log(this.dataSource);
+    //   this.isLoadingResults = false;
+    // });
 
-    }
+    this.service.getOrders()
+    .subscribe(
+      // data => {
+      //   this.dataSource = new MatTableDataSource<IOrder>([id]);
+      // }
+
+      // (res: IOrder) => {
+      // this.dataSource.data = res;
+      // console.log(this.dataSource);
+      // this.isLoadingResults = false;
+      // }
+
+      // data => {
+      //   this.dataSource = new MatTableDataSource<IOrder>(data);
+      // }
+
+      // (res: IOrder[])
+      // BELOW WORKS to get all data
+      /*
+      data => {
+        this.dataSource = new MatTableDataSource(data);
+      }
+      */
+      data => {
+        // d => d.customerId > 1
+        // d => d.id === 1
+        // d.id === id
+        const filteredData = data.filter(d => d.id === id);
+        this.dataSource = new MatTableDataSource(filteredData);
+        // this.dataSource.sort = this.sort;
+        // this.dataSource.paginator = this.paginator;
+      }
+
+
+    );
+
+  }
+
 
     // TODO  issues in console regarding id
   getOrderDetails(id) {
@@ -80,8 +155,28 @@ export class OrderDetailComponent implements OnInit {
       );
   }
 
-}
 
+  loadData() {
+    // added
+    // const id = +this.route.snapshot.paramMap.get('id');
+    // this.service
+    this.service.getOrders()
+    .subscribe((res: IOrder[]) => {
+      this.dataSource.data = res;
+      console.log(this.dataSource);
+      this.isLoadingResults = false;
+    });
+    /*
+    this.service.getOrders()
+    .subscribe((res: IOrder[]) => {
+      this.dataSource.data = res;
+      console.log(this.dataSource);
+      this.isLoadingResults = false;
+    });
+    */
+  }
+
+}
 
     // jc
     // this.service.getOrdersByCustomer(id)

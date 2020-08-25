@@ -23,6 +23,15 @@ export class CustomerOrdersComponent implements OnInit {
   customer: ICustomer;
   products: IProduct[] = [];
 
+  // --------------
+  selectedRowIndex = -1;
+
+  pageSize = 5;
+  pageSizeOptions = [5, 10, 25, 100];
+
+  isTableHasData = true;
+
+
   constructor(
     private orderService: OrderService,
     // jc
@@ -48,6 +57,23 @@ export class CustomerOrdersComponent implements OnInit {
       .subscribe((customer: ICustomer) => {
         this.customer = customer;
       });
+    // jc
+    this.productService.getProducts()
+      .subscribe((products: IProduct[]) => {
+        this.products = products;
+      });
+    /*
+    this.service.getProducts()
+    .subscribe((res: IProduct[]) => {
+      this.dataSource.data = res;
+      console.log(this.dataSource);
+      this.isLoadingResults = false;
+    }, err => {
+      console.log(err);
+      this.isLoadingResults = false;
+    });
+    */
   }
+
 
 }

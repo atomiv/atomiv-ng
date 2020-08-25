@@ -1,0 +1,124 @@
+<!-- € -->
+
+
+<div class="container mt-5">
+  
+  <div *ngIf="isLoadingResults">
+    <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+  </div>
+  <div>
+    <!-- back -->
+    <a mat-button color="primary" class="mb-5" [routerLink]="['/orders']"><mat-icon>arrow_back_ios</mat-icon>Back</a>
+  </div>
+
+  
+  <!-- TODO !showing -->
+  <div fxLayout="column" *ngIf="order">
+
+    <mat-card>
+
+      <mat-card-header>
+        <mat-card-title>
+          Order No: {{order.id}}
+        </mat-card-title>
+      </mat-card-header>
+
+      <mat-card-content>
+        <mat-list>
+          <!-- <mat-list-item>
+            <div mat-line>Customer Id:</div>
+            <span mat-line>{{order.customerId}}</span>
+          </mat-list-item> -->
+          <mat-list-item class="mb-3">
+            <span *ngFor="let customer of customers">
+              <div *ngIf="customer.id === order.customerId">
+                Customer: {{ customer.firstName }} {{ customer.lastName }}
+              </div>
+            </span>
+          </mat-list-item>
+        </mat-list>
+        <!-- --------------------------------------- -->
+        <!-- {{order.id}}<br/> -->
+        <!-- {{order.customerId}}<br/> -->
+        <!-- -------------------------------------- -->
+        <!-- <ng-container *ngFor="let orderItem of order.orderItems"> -->
+          <!-- *ngFor="let orderItem of order.orderItems" -->
+          <table mat-table [dataSource]="dataSource">
+            <!-- <tr *ngFor="let orderItem of order.orderItems"> -->
+
+              
+              <ng-container matColumnDef="id">
+                <!-- <ng-container *ngFor="let orderItem of order.orderItems"> -->
+                  <th mat-header-cell *matHeaderCellDef>Order Line</th>
+                  <!-- <tr *ngFor="let orderItem of order.orderItems"> -->
+                    <!-- ONLY SHOWS 1 answer -->
+                    <!-- <ng-container *ngFor="let orderItem of order.orderItems"> -->
+                    <td mat-cell *matCellDef="let row">
+                      <ng-container *ngFor="let orderItem of row.orderItems">
+                        <div class="sub-cell">
+                          {{orderItem.id}}
+                        </div>
+                      </ng-container>
+                    </td>
+                  <!-- </ng-container> -->
+                  <!-- </tr> -->
+                <!-- </ng-container> -->
+              </ng-container>
+
+              <ng-container matColumnDef="productId">
+                <th mat-header-cell *matHeaderCellDef>productId</th>
+                  <td mat-cell *matCellDef="let row">
+                    <ng-container *ngFor="let orderItem of row.orderItems">
+                      <div class="sub-cell">
+                        {{orderItem.productId}}
+                      </div>
+                    </ng-container>
+                  </td>
+              </ng-container>
+
+              <ng-container matColumnDef="quantity">
+                <th mat-header-cell *matHeaderCellDef>quantity</th>
+                  <td mat-cell *matCellDef="let row">
+                    <ng-container *ngFor="let orderItem of row.orderItems">
+                      <div class="sub-cell">
+                        {{orderItem.quantity}}
+                      </div>
+                    </ng-container>
+                  </td>
+              </ng-container>
+
+              
+            <!-- </ng-container> -->
+            <!-- </tr> -->
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns; "></tr>
+        </table>
+      <!-- </ng-container> -->
+      <!-- TODO: Order total -->
+        <!-- Angular material table footer totals -->
+        <!-- angular et total value in column -->
+        <!-- -------------------------------------- -->
+      </mat-card-content>
+
+      <mat-card-actions>
+        <button mat-flat-button color="primary" class="mr-3" [routerLink]="['/orders/edit', order.id]">
+          Edit
+        </button>
+        <button mat-stroked-button color="primary" (click)="deleteOrder(order.id)">
+          Delete
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  
+  </div>
+
+  <div *ngIf="!order">
+    No order found
+   </div>  
+   <br />
+   <!-- <a routerLink="/orders">View All Orders</a> -->
+
+</div>
+
+
+
